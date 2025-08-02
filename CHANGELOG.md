@@ -1,4 +1,4 @@
-# 0.2.0-SNAPSHOT
+## 0.2.0 (2025-08-02)
 
 - pooled-storage
 - com.taoensso/telemere
