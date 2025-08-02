@@ -27,5 +27,5 @@
 /target
 
 !/data/.keep
-/data
+/data/*
 .repl-port
