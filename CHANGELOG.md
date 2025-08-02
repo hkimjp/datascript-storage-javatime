@@ -1,5 +1,6 @@
 # 2025-08-02
 
+- fixed .gitignore - incldue /data/.keep, ignore /data/*
 - initialized repository
 
 # 2025-07-31
