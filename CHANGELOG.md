@@ -1,5 +1,7 @@
-# 2025-08-02
+# 0.2.0-SNAPSHOT
 
+- pooled-storage
+- com.taoensso/telemere
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
 - initialized repository
 
@@ -11,7 +13,7 @@
   https://github.com/hkimjp/datascript-stroage
 ```
 
-# 2025-07-31
+# 0.1.0 (2025-07-31)
 
 
 ```clojure
