@@ -2,6 +2,14 @@
 
 - initialized repository
 
+- github does not allow me to create repository name including '+'?
+
+```
+❯ gh repo create hkimjp/datascript+stroage.git --public
+✓ Created repository hkimjp/datascript-stroage on github.com
+  https://github.com/hkimjp/datascript-stroage
+```
+
 # 2025-07-31
 
 
