@@ -1,8 +1,19 @@
-# 2025-08-02
+## 0.2.0 (2025-08-02)
 
+- pooled-storage
+- com.taoensso/telemere
+- fixed .gitignore - incldue /data/.keep, ignore /data/*
 - initialized repository
 
-# 2025-07-31
+- github does not allow me to create repository name including '+'?
+
+```
+❯ gh repo create hkimjp/datascript+stroage.git --public
+✓ Created repository hkimjp/datascript-stroage on github.com
+  https://github.com/hkimjp/datascript-stroage
+```
+
+# 0.1.0 (2025-07-31)
 
 
 ```clojure
