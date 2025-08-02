@@ -1,5 +1,6 @@
 # 2025-08-02
 
+- fixed .gitignore - incldue /data/.keep, ignore /data/*
 - initialized repository
 
 - github does not allow me to create repository name including '+'?
