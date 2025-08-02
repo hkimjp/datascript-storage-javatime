@@ -26,5 +26,6 @@
 /classes
 /target
 
+!/data/.keep
 /data
 .repl-port
