@@ -46,9 +46,6 @@
 (defn restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
-(defn gc []
-  (d/collect-garbage storage))
-
 (defn close-conn []
   (storage-sql/close storage)
   (alter-var-root #'storage (constantly nil))
@@ -71,3 +68,6 @@
 
 (defn conn? []
   (d/conn? conn))
+
+(defn gc []
+  (d/collect-garbage storage))
