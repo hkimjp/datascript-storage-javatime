@@ -6,18 +6,6 @@ help:
 plus:
   clj -X:dev clojure+.core.server/start-server
 
-nrepl:
-  clojure -M:dev -m nrepl.cmdline
-
-container-nrepl:
-  clojure -M:dev -m nrepl.cmdline -b 0.0.0.0 -p 7777
-
-up:
-  docker compose up -d
-
-down:
-  docker compise down
-
 run:
   clojure -M:run-m
 
@@ -34,7 +22,6 @@ test:
   clojure -M:test --watch
 
 upgrade: update
-
 update:
   clojure -Tantq outdated :upgrade true :force true
 

@@ -1,13 +1,14 @@
-# 2025-08-11
+# TODO
+
+## 0.2-SNAPSHOT
 
 - improved `deps.edn`
-
-# 2025-08-02
-
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
 - initialized repository `git@github.com:hkimjp/datascript-strage.git`
 
-# 2025-07-31
+## 0.1.0 (2025-07-31)
+
+- sucessed java-time objects roundtrip by `time-literals.read-write`.
 
 ```clojure
 (require '[time-literals.read-write])

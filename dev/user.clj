@@ -6,12 +6,14 @@
     :refer [schema storage create-conn restore-conn close-conn]]
    [java-time.api :as jt]))
 
+;------
 (reload/init
  {:dirs ["src" "dev" "test"]})
 
 (comment
   (reload/reload)
   :rcf)
+;------
 
 (comment
   schema
@@ -26,6 +28,11 @@
   (close-conn)
 
   (def conn (restore-conn storage))
+
+  (d/q '[:find ?e ?time
+         :where
+         [?e :time ?time]]
+       @conn)
 
   (d/transact! conn [{:db/id -1, :name "bonbay sapphire"}])
   (d/transact! conn [{:db/id -1, :date (jt/local-date)}])
