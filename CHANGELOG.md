@@ -1,10 +1,18 @@
-# 2025-08-02
+# TODO
 
+- once closed the connection, can not reconnect in a same session.
+  after restarting clojure, it's OK.
+
+## 0.2-SNAPSHOT
+
+- improved `deps.edn`
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
-- initialized repository
+- initialized repository `git@github.com:hkimjp/datascript-strage.git`
+- hkimjp/datascript/{start,stop}
 
-# 2025-07-31
+## 0.1.0 (2025-07-31)
 
+- sucessed java-time objects roundtrip by `time-literals.read-write`.
 
 ```clojure
 (require '[time-literals.read-write])
