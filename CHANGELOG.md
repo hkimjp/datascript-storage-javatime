@@ -1,6 +1,9 @@
-# TODO
+# Datascript + storage
 
-## 0.2.1
+## 0.2.29 (2025-08-11)
+
+
+## 0.2.24 (2025-08-11)
 
 - fixed: once closed the connection, can not reconnect in a same session.
   after restarting clojure, it's OK.
