@@ -25,9 +25,7 @@
   (storage-sql/make pooled-datasource
                     {:dbtype :sqlite
                      :freeze-str pr-str
-                     :thaw-str   #(read-string
-                                   {:readers time-literals.read-write/tags}
-                                   %)
+                     :thaw-str #(read-string {:readers time-literals.read-write/tags} %)
                     ; :freeze-bytes
                     ; (fn ^bytes [obj]
                     ;   (with-open [out (ByteArrayOutputStream.)]
@@ -49,12 +47,12 @@
 (defn restore-conn []
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
-(defn gc []
-  (d/collect-garbage storage))
-
 (defn close-conn []
   (storage-sql/close storage)
   (alter-var-root #'conn (constantly nil)))
+
+(defn gc []
+  (d/collect-garbage storage))
 
 ;------
 
