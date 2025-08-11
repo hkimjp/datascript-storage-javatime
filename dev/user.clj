@@ -18,7 +18,6 @@
   (def url "jdbc:sqlite:data/db.sqlite")
 
   (ds/conn?)
-
   (def conn (ds/start url))
   (ds/conn?)
 
@@ -62,6 +61,8 @@
   (d/pull @conn '[*] 3)
 
   (jt/plus (:time (d/pull @conn '[*] 2) (jt/days 1)))
+
+  (gc)
 
   (ds/stop)
   :rcf)

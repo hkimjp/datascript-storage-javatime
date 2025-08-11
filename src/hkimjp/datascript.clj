@@ -25,7 +25,8 @@
   [ds]
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
-(defn storage
+;; currently sqlite3 only
+(defn sqlite-storage
   [datasource]
   (storage-sql/make datasource
                     {:dbtype :sqlite
@@ -36,7 +37,7 @@
   (let [st (-> url
                datasource
                pooled-datasource
-               storage)]
+               sqlite-storage)]
     (alter-var-root #'storage (constantly st))))
 
 (defn create-conn [schema storage]
@@ -44,6 +45,9 @@
 
 (defn restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
+
+(defn gc []
+  (d/collect-garbage storage))
 
 (defn close-conn []
   (storage-sql/close storage)
