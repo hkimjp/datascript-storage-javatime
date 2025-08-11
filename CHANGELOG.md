@@ -3,7 +3,16 @@
 - once closed the connection, can not reconnect in a same session.
   after restarting clojure, it's OK.
 
-## 0.2-SNAPSHOT
+```
+NullPointerException: "Cannot invoke \"clojure.lang.IFn.invoke(Object)\"
+because the return value of \"clojure.lang.Var.getRawRoot()\" is null"
+  hkimjp.datascript/make-storage  datascript.clj 36
+  hkimjp.datascript/start         datascript.clj 62
+  Compiler$InvokeExpr.eval        Compiler.java 4209
+  Compiler$DefExpr.eval           Compiler.java 464
+```
+
+## 0.2.0 (2025-08-11)
 
 - improved `deps.edn`
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
