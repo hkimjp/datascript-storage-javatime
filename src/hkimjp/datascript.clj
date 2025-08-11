@@ -5,14 +5,16 @@
    [datascript.core :as d]
    [datascript.storage.sql.core :as storage-sql]
    [fast-edn.core :refer [read-string]]
-   [time-literals.read-write :as rw]
-   #_[cognitect.transit :as t])
-  #_(:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
-
-(add-tap #'prn)
+   [time-literals.read-write :as rw]))
 
 (time-literals.read-write/print-time-literals-clj!)
 
+;; ^:private?
+(def conn nil)
+(def schema nil)
+(def storage nil)
+
+;; defn-
 (defn datasource
   ([] (datasource "jdbc:sqlite:data/db.sqlite"))
   ([url]
@@ -31,14 +33,11 @@
                      :thaw-str   #(read-string {:readers rw/tags} %)}))
 
 (defn make-storage [url]
-  (-> url
-      datasource
-      pooled-datasource
-      storage))
-
-(def schema nil)
-
-(def conn nil)
+  (let [st (-> url
+               datasource
+               pooled-datasource
+               storage)]
+    (alter-var-root #'storage (constantly st))))
 
 (defn create-conn [schema storage]
   (alter-var-root #'conn (constantly (d/create-conn schema storage))))
@@ -48,6 +47,7 @@
 
 (defn close-conn []
   (storage-sql/close storage)
+  (alter-var-root #'storage (constantly nil))
   (alter-var-root #'conn (constantly nil)))
 
 ;---------
@@ -56,10 +56,6 @@
   (let [[_ _ path] (str/split url #":")]
     (.exists (java.io.File. path))))
 
-(tap> "hello")
-(tap> (str/split "jdbc:sqlite:data/db.sqlite" #":"))
-(tap> (.exists (java.io.File. "jdbc:sqlite:data/db.sqlite")))
-
 (defn start
   ([] (create-conn nil nil))
   ([url] (if (exist? url)
@@ -67,10 +63,7 @@
            (create-conn nil {:storage (make-storage url)}))))
 
 (defn stop []
-  (close-conn)
-  (storage-sql/close storage))
+  (close-conn))
 
-(comment
-  (start)
-  (stop)
-  :rcf)
+(defn conn? []
+  (d/conn? conn))
