@@ -1,10 +1,13 @@
+# 2025-08-11
+
+- improved `deps.edn`
+
 # 2025-08-02
 
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
-- initialized repository
+- initialized repository `git@github.com:hkimjp/datascript-strage.git`
 
 # 2025-07-31
-
 
 ```clojure
 (require '[time-literals.read-write])

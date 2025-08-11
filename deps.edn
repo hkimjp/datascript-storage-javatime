@@ -3,7 +3,8 @@
  :deps
  {org.clojure/clojure                     {:mvn/version "1.12.1"}
   clojure.java-time/clojure.java-time     {:mvn/version "1.4.3"}
-  com.cognitect/transit-clj               {:mvn/version "1.0.333"}
+  ;; com.cognitect/transit-clj               {:mvn/version "1.0.333"}
+  com.taoensso/telemere                   {:mvn/version "1.0.1"}
   com.widdindustries/time-literals        {:mvn/version "0.1.10"}
   datascript/datascript                   {:mvn/version "1.7.5"}
   io.github.tonsky/datascript-storage-sql {:mvn/version "2.1.0"}
@@ -16,9 +17,13 @@
    :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
                  "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
                  "--enable-native-access=ALL-UNNAMED"]
-   :extra-deps  {criterium/criterium           {:mvn/version "0.4.6"}
-                 io.github.tonsky/clj-reload   {:mvn/version "0.9.8"}
-                 io.github.tonsky/clojure-plus {:mvn/version "1.6.1"}
-                 ;; lambdaisland/kaocha           {:mvn/version "1.91.1392"}
-                 nrepl/nrepl                   {:mvn/version "1.3.1"}
-                 org.clojure/test.check        {:mvn/version "1.1.1"}}}}}
+   :extra-deps  {io.github.tonsky/clj-reload   {:mvn/version "0.9.8"}
+                 io.github.tonsky/clojure-plus {:mvn/version "1.6.3"}}}
+  :test
+  {:extra-deps {lambdaisland/kaocha    {:mvn/version "1.91.1392"}
+                org.slf4j/slf4j-simple {:mvn/version "2.0.17"}}
+   :main-opts  ["-m" "kaocha.runner"]
+   :jvm-opts   ["--enable-native-access=ALL-UNNAMED"]}
+
+  :bench
+  {:extra-deps  {criterium/criterium {:mvn/version "0.4.6"}}}}}

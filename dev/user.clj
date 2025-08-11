@@ -9,9 +9,13 @@
 (reload/init
  {:dirs ["src" "dev" "test"]})
 
-(reload/reload)
+(comment
+  (reload/reload)
+  :rcf)
 
 (comment
+  schema
+  storage
   (create-conn schema storage)
 
   (def conn (d/create-conn schema {:storage storage}))
@@ -27,7 +31,7 @@
   (d/transact! conn [{:db/id -1, :date (jt/local-date)}])
   (d/transact! conn [{:db/id -1, :name "deacon" :date (jt/local-date)}])
 
-  (d/q '[:find (max ?e)
+  (d/q '[:find ?e
          :where
          [?e _ _]]
        @conn)

@@ -31,7 +31,7 @@ lint:
   clojure -M:lint -m clj-kondo.main --lint .
 
 test:
-  clojure -M:dev -m kaocha.runner
+  clojure -M:test --watch
 
 upgrade: update
 
