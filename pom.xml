@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.clojars.ds</groupId>
   <artifactId>ds</artifactId>
-  <version>0.2.0</version>
+<version>0.2.0</version>
   <name>ds</name>
   <description>FIXME: my new application.</description>
   <url>https://github.com/ds/ds</url>

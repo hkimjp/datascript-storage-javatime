@@ -63,5 +63,7 @@
 
   (jt/plus (:time (d/pull @conn '[*] 2) (jt/days 1)))
 
+  (gc)
+
   (ds/stop)
   :rcf)

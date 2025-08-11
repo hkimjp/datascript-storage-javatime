@@ -2,10 +2,16 @@
   (:refer-clojure :exclude [read-string])
   (:require
    [clojure.string :as str]
+   [clojure.string :as str]
    [datascript.core :as d]
    [datascript.storage.sql.core :as storage-sql]
    [fast-edn.core :refer [read-string]]
    [time-literals.read-write :as rw]))
+
+(def pooled-datasource
+  (storage-sql/pool datasource
+                    {:max-conn 10
+                     :max-idle-conn 4}))
 
 (time-literals.read-write/print-time-literals-clj!)
 
@@ -42,8 +48,11 @@
 (defn create-conn [schema storage]
   (alter-var-root #'conn (constantly (d/create-conn schema storage))))
 
-(defn restore-conn [storage]
+(defn restore-conn []
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
+
+(defn gc []
+  (d/collect-garbage storage))
 
 (defn close-conn []
   (storage-sql/close storage)

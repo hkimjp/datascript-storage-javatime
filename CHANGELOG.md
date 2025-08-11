@@ -19,7 +19,15 @@ because the return value of \"clojure.lang.Var.getRawRoot()\" is null"
 - initialized repository `git@github.com:hkimjp/datascript-strage.git`
 - hkimjp/datascript/{start,stop}
 
-## 0.1.0 (2025-07-31)
+- github does not allow me to create repository name including '+'?
+
+```
+❯ gh repo create hkimjp/datascript+stroage.git --public
+✓ Created repository hkimjp/datascript-stroage on github.com
+  https://github.com/hkimjp/datascript-stroage
+```
+
+# 0.1.0 (2025-07-31)
 
 - sucessed java-time objects roundtrip by `time-literals.read-write`.
 
