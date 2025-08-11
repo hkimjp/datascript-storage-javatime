@@ -3,7 +3,7 @@
 Datascript + Sqlite backend.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.
-However, I could not store java-time's objects onto it.
+However, I could not store java-time objects onto it.
 Henryw374's `com.widdindustries/time-literals` solved the situation.
 I much thank you two.
 
