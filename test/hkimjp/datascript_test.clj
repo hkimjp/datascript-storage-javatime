@@ -1,7 +1,7 @@
 (ns hkimjp.datascript-test
-  (:require [clojure.test :refer :all]
-            [hkimjp.datascript :refer :all]))
+  (:require [clojure.test :as t]
+            [hkimjp.datascript :as ds]))
 
-(deftest a-test
-  (testing "I success."
-    (is (= 0 0))))
+(t/deftest a-test
+  (t/testing "I success."
+    (t/is (= 0 0))))
