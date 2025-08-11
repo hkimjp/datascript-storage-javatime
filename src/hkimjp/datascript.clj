@@ -2,16 +2,10 @@
   (:refer-clojure :exclude [read-string])
   (:require
    [clojure.string :as str]
-   [clojure.string :as str]
    [datascript.core :as d]
    [datascript.storage.sql.core :as storage-sql]
    [fast-edn.core :refer [read-string]]
    [time-literals.read-write :as rw]))
-
-(def pooled-datasource
-  (storage-sql/pool datasource
-                    {:max-conn 10
-                     :max-idle-conn 4}))
 
 (time-literals.read-write/print-time-literals-clj!)
 
@@ -31,7 +25,8 @@
   [ds]
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
-(defn storage
+;; currently sqlite3 only
+(defn sqlite-storage
   [datasource]
   (storage-sql/make datasource
                     {:dbtype :sqlite
@@ -42,13 +37,13 @@
   (let [st (-> url
                datasource
                pooled-datasource
-               storage)]
+               sqlite-storage)]
     (alter-var-root #'storage (constantly st))))
 
 (defn create-conn [schema storage]
   (alter-var-root #'conn (constantly (d/create-conn schema storage))))
 
-(defn restore-conn []
+(defn restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
 (defn gc []

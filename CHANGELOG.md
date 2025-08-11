@@ -1,6 +1,8 @@
 # TODO
 
-- once closed the connection, can not reconnect in a same session.
+## 0.2.1
+
+- fixed: once closed the connection, can not reconnect in a same session.
   after restarting clojure, it's OK.
 
 ```

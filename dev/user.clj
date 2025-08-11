@@ -18,7 +18,6 @@
   (def url "jdbc:sqlite:data/db.sqlite")
 
   (ds/conn?)
-
   (def conn (ds/start url))
   (ds/conn?)
 
