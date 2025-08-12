@@ -4,7 +4,10 @@ help:
   just --list
 
 plus:
-  clj -X:dev clojure+.core.server/start-server
+  clj -X:dev:plus
+
+nrepl:
+  clj -M:dev:nrepl
 
 run:
   clojure -M:run-m
@@ -21,8 +24,7 @@ lint:
 test:
   clojure -M:test --watch
 
-upgrade: update
-update:
+upgrade:
   clojure -Tantq outdated :upgrade true :force true
 
 clean:

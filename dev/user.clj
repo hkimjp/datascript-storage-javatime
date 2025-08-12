@@ -39,8 +39,6 @@
 
   (def conn (ds/start))
 
-  conn
-  conn
   (d/transact! conn [{:db/id -1, :name "bonbay sapphire"}])
   (d/transact! conn [{:db/id -1, :date (jt/local-date)}])
   (d/transact! conn [{:db/id -1, :name "deacon" :date (jt/local-date)}])
@@ -62,7 +60,7 @@
 
   (jt/plus (:time (d/pull @conn '[*] 2) (jt/days 1)))
 
-  (gc)
+  (ds/gc)
 
   (ds/stop)
   :rcf)
