@@ -1,25 +1,26 @@
 (ns user
   (:require
-   [clj-reload.core :as reload]
    [datascript.core :as d]
-   [hkimjp.datascript :as ds]
+   [hkimjp.datascript :as ds :refer [start stop gc conn?]]
    [java-time.api :as jt]))
 
-;------
-(reload/init
- {:dirs ["src" "dev" "test"]})
-
+;;------
 (comment
+  (require '[clj-reload.core :as reload])
+
+  (reload/init
+   {:dirs ["src" "dev" "test"]})
+
   (reload/reload)
   :rcf)
-;------
+;;------
 
 (comment
   (def url "jdbc:sqlite:data/db.sqlite")
 
-  (ds/conn?)
-  (def conn (ds/start url))
-  (ds/conn?)
+  (conn?)
+  (def conn (start url))
+  (conn?)
 
   (d/q '[:find ?e ?time
          :where
@@ -29,15 +30,15 @@
   (d/transact! conn [{:db/id -1, :time (java.util.Date.)}])
   (d/transact! conn [{:db/id -1, :time (jt/local-date-time)}])
 
-  (ds/stop)
+  (stop)
 
-  (ds/conn?)
+  (conn?)
 
-  (def conn (ds/start url))
+  (def conn (start url))
 
-  (ds/stop)
+  (stop)
 
-  (def conn (ds/start))
+  (def conn (start))
 
   (d/transact! conn [{:db/id -1, :name "bonbay sapphire"}])
   (d/transact! conn [{:db/id -1, :date (jt/local-date)}])
@@ -60,7 +61,7 @@
 
   (jt/plus (:time (d/pull @conn '[*] 2) (jt/days 1)))
 
-  (ds/gc)
+  (gc)
 
-  (ds/stop)
+  (stop)
   :rcf)
