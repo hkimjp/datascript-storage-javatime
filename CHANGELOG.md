@@ -1,9 +1,32 @@
-## 0.2.0 (2025-08-02)
+# 0.2.30 (2025-08-17)
 
-- pooled-storage
-- com.taoensso/telemere
+- only `start`, `stop`, `conn?`, `gc` are public
+- removed `clj-reload` from dependency
+
+# 0.2.29 (2025-08-11)
+
+- improved README.md
+
+# 0.2.24 (2025-08-11)
+
+- fixed: once closed the connection, can not reconnect in a same session.
+  after restarting clojure, it's OK.
+
+```
+NullPointerException: "Cannot invoke \"clojure.lang.IFn.invoke(Object)\"
+because the return value of \"clojure.lang.Var.getRawRoot()\" is null"
+  hkimjp.datascript/make-storage  datascript.clj 36
+  hkimjp.datascript/start         datascript.clj 62
+  Compiler$InvokeExpr.eval        Compiler.java 4209
+  Compiler$DefExpr.eval           Compiler.java 464
+```
+
+# 0.2.0 (2025-08-11)
+
+- improved `deps.edn`
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
-- initialized repository
+- initialized repository `git@github.com:hkimjp/datascript-strage.git`
+- hkimjp/datascript/{start,stop}
 
 - github does not allow me to create repository name including '+'?
 
@@ -15,6 +38,7 @@
 
 # 0.1.0 (2025-07-31)
 
+- sucessed java-time objects roundtrip by `time-literals.read-write`.
 
 ```clojure
 (require '[time-literals.read-write])

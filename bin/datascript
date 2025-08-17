@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd ~/clojure/datascript-storage
+clj -M:dev:nrepl --interactive
+
