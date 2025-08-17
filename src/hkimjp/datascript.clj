@@ -14,7 +14,7 @@
 (def schema nil)
 (def storage nil)
 
-;; defn-
+;; defn-?
 (defn datasource
   ([] (datasource "jdbc:sqlite:data/db.sqlite"))
   ([url]
@@ -47,16 +47,16 @@
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
 (defn close-conn []
-  (storage-sql/close storage)
-  (alter-var-root #'storage (constantly nil))
-  (alter-var-root #'conn (constantly nil)))
-
-;---------
+  (when (some? storage)
+    (storage-sql/close storage)
+    (alter-var-root #'storage (constantly nil)))
+  (when (some? conn)
+    (alter-var-root #'conn (constantly nil))))
 
 (defn- exist? [url]
   (let [[_ _ path] (str/split url #":")]
     (.exists (java.io.File. path))))
-
+;---------
 (defn start
   ([] (create-conn nil nil))
   ([url] (if (exist? url)

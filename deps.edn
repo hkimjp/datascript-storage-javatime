@@ -14,5 +14,4 @@
  {:dev
   {:extra-paths ["dev"]
    :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "0.9.8"}}}
-
   :neil {:project {:name hkimjp/datascript-storage}}}}
