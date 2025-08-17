@@ -3,7 +3,7 @@
   (:require [org.corfield.build :as bb]))
 
 (def lib 'hkimjp/datascript)
-(def version "2.2.34")
+(def version "0.2.30")
 (def main 'ds.ds)
 
 (defn test "Run the tests." [opts]

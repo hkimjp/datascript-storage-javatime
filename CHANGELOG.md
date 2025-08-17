@@ -1,6 +1,11 @@
+# 0.2.30 (2025-08-17)
+
+- only `start`, `stop`, `conn?`, `gc` are public
+- removed `clj-reload` from dependency
+
 # 0.2.29 (2025-08-11)
 
-- improve README.md
+- improved README.md
 
 # 0.2.24 (2025-08-11)
 

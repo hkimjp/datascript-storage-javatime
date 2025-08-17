@@ -11,18 +11,4 @@
   org.xerial/sqlite-jdbc                  {:mvn/version "3.50.3.0"}}
 
  :aliases
- {:dev
-  {:extra-paths ["dev" "test"]
-   :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
-                 "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-                 "--enable-native-access=ALL-UNNAMED"]
-   :extra-deps  {io.github.tonsky/clj-reload   {:mvn/version "0.9.8"}
-                 io.github.tonsky/clojure-plus {:mvn/version "1.6.3"}}}
-  :test
-  {:extra-deps {lambdaisland/kaocha    {:mvn/version "1.91.1392"}
-                org.slf4j/slf4j-simple {:mvn/version "2.0.17"}}
-   :main-opts  ["-m" "kaocha.runner"]
-   :jvm-opts   ["--enable-native-access=ALL-UNNAMED"]}
-
-  :bench
-  {:extra-deps  {criterium/criterium {:mvn/version "0.4.6"}}}}}
+ {:neil {:project {:name hkimjp/datascript-storage}}}}
