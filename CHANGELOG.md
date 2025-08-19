@@ -1,4 +1,4 @@
-## 0.3.54 (2025-08-19)
+# 0.3.54 (2025-08-19)
 
 - {:git/tag :git/sha} - use `git show-ref --abbrev=7 --tags`
 - convenience funcitons - q, entity, pull, puts
