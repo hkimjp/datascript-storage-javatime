@@ -20,14 +20,10 @@ Start REPL as;
 Then connect your REPL client.
 
     ❯ trench -p `cat .nrepl-port`
-    user=> (def conn (ds/start))
+    user=>
 
 I'm using tonsky's clojure+ with Sublime.
-Of course, powered by his Clojure Sublimed.
-
-## Options
-
-FIXME: listing of options this app accepts.
+Of course, powered by Clojure Sublimed.
 
 ## Examples
 
@@ -59,11 +55,7 @@ FIXME: listing of options this app accepts.
 
 ### Bugs
 
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+Maybe.
 
 ## License
 
