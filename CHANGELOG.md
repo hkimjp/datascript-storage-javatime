@@ -1,3 +1,8 @@
+# 0.3-SNAPSHOT
+
+- {:git/tag :git/sha}
+- convenience funcitons?
+
 # 0.2.31 (2025-08-19)
 
 - imporved `README.md`
