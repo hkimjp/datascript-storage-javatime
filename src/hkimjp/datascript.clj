@@ -39,8 +39,11 @@
                sqlite-storage)]
     (alter-var-root #'storage (constantly st))))
 
-(defn- create-conn [schema storage]
-  (alter-var-root #'conn (constantly (d/create-conn schema storage))))
+(defn- create-conn
+  ([schema]
+   (alter-var-root #'conn (constantly (d/create-conn schema))))
+  ([schema storage]
+   (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
@@ -60,6 +63,7 @@
 
 (defn start
   ([] (create-conn nil nil))
+  ([schema] (create-conn schema nil))
   ([schema url]
    (if (exist? url)
      (restore-conn (make-storage url))

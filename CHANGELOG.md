@@ -1,7 +1,12 @@
 # 0.4-SNAPSHOT
 
-- (start) or (start schema storage)
-  if exists `storage`, ignores `schema`.
+- changed (start) or (start schema storage) - if exists `storage`,
+  ignores `schema`.
+- changed `ds/q` - defined as a function not a macro.
+- conn and storage are privare.
+- in a single transaction, negative db/id keep consistent?
+- changed create-conn - multi arity function.
+
 
 # 0.3.54 (2025-08-19)
 
