@@ -11,7 +11,7 @@ I much thank you two.
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage {:git/tag 0.3.54 :git/sha 22475d6}
+io.github.hkimjp/datascript-storage {:git/tag "0.3.54" :git/sha "22475d6"}
 ```
 
 ## Usage
@@ -23,36 +23,27 @@ Start REPL as;
 Then connect your REPL client.
 
     ❯ trench -p `cat .nrepl-port`
-    user=>
+    user=> (require '[datascript.core :as ds])
+    nil
 
-I'm using tonsky's clojure+ with Sublime.
+In my case, using tonsky's clojure+ with Sublime.
 Of course, powered by Clojure Sublimed.
 
 ## Examples
 
-    user=> (require '[datascript.core :as d])
-    nil
-    user=> (require '[hkimjp.datascript :as ds])
-    nil
     user=> (require '[java-time.api :as jt])
     nil
-    user=> (def conn (ds/start "jdbc:sqlite:data/db.sqlite"))
-    #'user/conn
-    user=> (d/transact! conn [{:db/id -1, :time (jt/local-date-time)}])
-    ...
-    user=> (d/q '[:find ?time
+    user=> (ds/puts! [{:db/id -1, :time (jt/local-date-time)}])
+    user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]]
-                @conn)
+                  [_ :time ?time]])
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=> (ds/stop)
     nil
     user=> (ds/start "jdbc:sqlite:data/db.sqlite")
-    #'user/conn
-    user=> (d/q '[:find ?time
+    user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]]
-                @conn)
+                  [_ :time ?time]])
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
 
