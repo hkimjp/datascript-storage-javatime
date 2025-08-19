@@ -1,3 +1,7 @@
+# 0.2.31 (2025-08-19)
+
+- imporved `README.md`
+
 # 0.2.30 (2025-08-17)
 
 - only `start`, `stop`, `conn?`, `gc` are public

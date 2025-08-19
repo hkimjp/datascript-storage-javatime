@@ -13,10 +13,17 @@ Download from https://github.com/hkimjp/datascript-storage
 
 ## Usage
 
-I'm using tonsky's clojure+ with Sublime.
-Of course, powered by Clojure Sublimed.
+Start REPL as;
 
-    $ clj -X:dev clojure+.core.server/start-server
+    ❯ clj -M:nrepl
+
+Then connect your REPL client.
+
+    ❯ trench -p `cat .nrepl-port`
+    user=> (def conn (ds/start))
+
+I'm using tonsky's clojure+ with Sublime.
+Of course, powered by his Clojure Sublimed.
 
 ## Options
 
