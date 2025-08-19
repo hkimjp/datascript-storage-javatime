@@ -14,27 +14,34 @@
   :rcf)
 ;;------
 
-(start)
-(ds/puts [{:db/id -1, :greeting "hello"}
-          {:db/id -1, :name "hiroshi"}
-          {:db/id -1, :age 63}])
-(ds/q '[:find ?e ?greeting ?to
-        :where
-        [?e :greeting ?greeting]
-        [?e :name ?to]])
+(comment
 
-(ds/pull 1)
-(ds/pull 2)
-(ds/pull 3)
-(ds/q '[:find ?e ?name ?to
-        :where
-        [?e :name ?name]
-        [?e :greeting ?to]])
-(ds/q '[:find ?age
-        :in $ ?name
-        :where
-        [?e :name ?name]
-        [?e :age ?age]]
-      "hiroshi")
+  (defn f
+    ([] (f {}))
+    ([{:keys [schema storage]}]
+     [schema storage]))
 
-(stop)
+  (f {:schema 1 :storage 2})
+  ;; => [1 2]
+  (f)
+  ;; => [nil nil]
+  :rcf)
+
+;; ------
+
+(comment
+
+  (start)
+
+  (ds/puts! [{:db/id -1, :name "name"}])
+
+  (ds/q '[:find ?e ?name
+          :where
+          [?e :name ?name]])
+
+  (ds/pull 1)
+  (ds/entity 1)
+  (stop)
+  (conn?)
+
+  :rcf)
