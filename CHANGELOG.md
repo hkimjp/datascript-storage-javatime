@@ -1,4 +1,13 @@
-## 0.4.66 (2025-08-19)
+# Unreleased
+
+- `datascript-storage-javatime` is the correct project name?
+- test
+
+# 0.5-SNAPSHOT
+
+- changed: ds/conn resumed to public.
+
+# 0.4.66 (2025-08-19)
 
 - changed (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.

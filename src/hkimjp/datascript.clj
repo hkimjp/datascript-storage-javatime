@@ -10,8 +10,7 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
-;; private?
-(def ^:private conn nil)
+(def conn nil)
 (def ^:private storage nil)
 
 (defn- datasource
@@ -85,13 +84,13 @@
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
 
-; (defmacro q [query & inputs]
-;   (t/log! :info (str "q " query))
-;   `(d/q ~query @conn ~@inputs))
-
-(defn q [query & inputs]
+(defmacro q [query & inputs]
   (t/log! :info (str "q " query))
-  (apply d/q query @conn inputs))
+  `(d/q ~query @conn ~@inputs))
+
+;; (defn q [query & inputs]
+;;   (t/log! :info (str "q " query))
+;;   (apply d/q query @conn inputs))
 
 (defn entity [id]
   (d/entity @conn id))

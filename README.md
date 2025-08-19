@@ -1,11 +1,14 @@
 # datascript-storage
 
-Datascript + Sqlite backend.
+Datascript + Sqlite backend with java-time enabled.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.
-However, I could not store java-time objects onto it.
+However, java-time tagged literals stored with `pr-str` on the storage
+could not restored by `edn/read-string`.
 Henryw374's `com.widdindustries/time-literals` solved the situation.
 I much thank you two.
+
+I added some simple convenience functions for my own use.
 
 ## Installation
 
