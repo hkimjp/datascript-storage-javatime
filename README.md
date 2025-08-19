@@ -11,7 +11,7 @@ I much thank you two.
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage {:git/tag "0.3.54" :git/sha "22475d6"}
+io.github.hkimjp/datascript-storage {:git/tag "0.4.66" :git/sha "846ed5a"}
 ```
 
 ## Usage
