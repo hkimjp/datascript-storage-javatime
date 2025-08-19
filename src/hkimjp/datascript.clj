@@ -9,12 +9,10 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
-;; ^:private?
-(def conn nil)
-(def schema nil)
-(def storage nil)
+(def ^:private conn nil)
+(def ^:private schema nil)
+(def ^:private storage nil)
 
-;; defn-?
 (defn- datasource
   ([] (datasource "jdbc:sqlite:data/db.sqlite"))
   ([url]
@@ -29,7 +27,7 @@
 (defn- sqlite-storage
   [datasource]
   (storage-sql/make datasource
-                    {:dbtype :sqlite
+                    {:dbtype     :sqlite
                      :freeze-str pr-str
                      :thaw-str   #(read-string {:readers rw/tags} %)}))
 

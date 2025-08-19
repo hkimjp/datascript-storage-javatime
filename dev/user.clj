@@ -16,6 +16,22 @@
 ;;------
 
 (comment
+  (conn?)
+  (def conn (start))
+  (conn?)
+
+  (d/transact! conn [{:db/id -1, :greeting "hello"}])
+  (d/q '[:find ?eid ?greeting
+         :where
+         [?eid :greeting ?greeting]]
+       @conn)
+
+  (d/q '[:find ?eid ?attr ?hello
+         :in $ ?attr
+         :where
+         [?eid ?attr ?hello]]
+       @conn :greeting)
+
   (def url "jdbc:sqlite:data/db.sqlite")
 
   (conn?)
