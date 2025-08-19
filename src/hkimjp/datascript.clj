@@ -5,79 +5,71 @@
    [datascript.core :as d]
    [datascript.storage.sql.core :as storage-sql]
    [fast-edn.core :refer [read-string]]
-   [taoensso.telemere :as t]
-   [time-literals.read-write]
-   #_[cognitect.transit :as t])
-  #_(:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
-
-(def datasource
-  (doto (org.sqlite.SQLiteDataSource.)
-    (.setUrl "jdbc:sqlite:data/db.sqlite")))
-
-(def pooled-datasource
-  (storage-sql/pool datasource
-                    {:max-conn 10
-                     :max-idle-conn 4}))
+   [time-literals.read-write :as rw]))
 
 (time-literals.read-write/print-time-literals-clj!)
 
-(def storage
-  (storage-sql/make pooled-datasource
+;; ^:private?
+(def conn nil)
+(def schema nil)
+(def storage nil)
+
+;; defn-?
+(defn- datasource
+  ([] (datasource "jdbc:sqlite:data/db.sqlite"))
+  ([url]
+   (doto (org.sqlite.SQLiteDataSource.)
+     (.setUrl url))))
+
+(defn- pooled-datasource
+  [ds]
+  (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
+
+;; currently sqlite3 only
+(defn- sqlite-storage
+  [datasource]
+  (storage-sql/make datasource
                     {:dbtype :sqlite
                      :freeze-str pr-str
-                     :thaw-str   #(read-string
-                                   {:readers time-literals.read-write/tags}
-                                   %)
-                    ; :freeze-bytes
-                    ; (fn ^bytes [obj]
-                    ;   (with-open [out (ByteArrayOutputStream.)]
-                    ;     (t/write (t/writer out :msgpack) obj)
-                    ;     (.toByteArray out)))
-                    ; :thaw-bytes
-                    ; (fn [^bytes b]
-                    ;   (t/read
-                    ;    (t/reader (ByteArrayInputStream. b) :msgpack)))
-                     }))
+                     :thaw-str   #(read-string {:readers rw/tags} %)}))
 
-(def schema nil)
+(defn- make-storage [url]
+  (let [st (-> url
+               datasource
+               pooled-datasource
+               sqlite-storage)]
+    (alter-var-root #'storage (constantly st))))
 
-(def conn nil)
+(defn- create-conn [schema storage]
+  (alter-var-root #'conn (constantly (d/create-conn schema storage))))
 
-(defn create-conn []
-  (alter-var-root #'conn (constantly (d/create-conn schema {:storage storage}))))
-
-(defn restore-conn []
+(defn- restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
+
+(defn- close-conn []
+  (when (some? storage)
+    (storage-sql/close storage)
+    (alter-var-root #'storage (constantly nil)))
+  (when (some? conn)
+    (alter-var-root #'conn (constantly nil))))
+
+(defn- exist? [url]
+  (let [[_ _ path] (str/split url #":")]
+    (.exists (java.io.File. path))))
+
+;;---------
+
+(defn start
+  ([] (create-conn nil nil))
+  ([url] (if (exist? url)
+           (restore-conn (make-storage url))
+           (create-conn nil {:storage (make-storage url)}))))
+
+(defn stop []
+  (close-conn))
+
+(defn conn? []
+  (d/conn? conn))
 
 (defn gc []
   (d/collect-garbage storage))
-
-(defn close-conn []
-  (storage-sql/close storage)
-  (alter-var-root #'conn (constantly nil)))
-
-;------
-
-(defn- shorten
-  ([s] (shorten s 80))
-  ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
-           (str/replace-first s pat "$1..."))))
-
-(defn put! [facts]
-  (t/log! :info (str "put! " (shorten facts)))
-  (d/transact! conn facts))
-
-(defmacro q? [query & inputs]
-  (t/log! :info (str "q " query))
-  `(d/q ~query @conn ~@inputs))
-
-(defn pull?
-  ([eid] (pull? '[*] eid))
-  ([selector eid]
-   (t/log! :info (str "pull " selector " " eid))
-   (d/pull @conn selector eid)))
-
-(defn entity?
-  [eid]
-  (t/log! :info (str "entity " eid))
-  (d/entity @conn eid))

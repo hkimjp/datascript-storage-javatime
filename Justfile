@@ -4,19 +4,10 @@ help:
   just --list
 
 plus:
-  clj -X:dev clojure+.core.server/start-server
+  clj -X:dev:plus
 
 nrepl:
-  clojure -M:dev -m nrepl.cmdline
-
-container-nrepl:
-  clojure -M:dev -m nrepl.cmdline -b 0.0.0.0 -p 7777
-
-up:
-  docker compose up -d
-
-down:
-  docker compise down
+  clj -M:dev:nrepl
 
 run:
   clojure -M:run-m
@@ -31,11 +22,9 @@ lint:
   clojure -M:lint -m clj-kondo.main --lint .
 
 test:
-  clojure -M:dev -m kaocha.runner
+  clojure -M:test --watch
 
-upgrade: update
-
-update:
+upgrade:
   clojure -Tantq outdated :upgrade true :force true
 
 clean:
