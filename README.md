@@ -9,7 +9,10 @@ I much thank you two.
 
 ## Installation
 
-Download from https://github.com/hkimjp/datascript-storage
+deps.edn:
+```
+io.github.hkimjp/datascript-storage {:git/tag 0.3.54 :git/sha 22475d6}
+```
 
 ## Usage
 
