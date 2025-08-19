@@ -10,8 +10,8 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
+;; private?
 (def ^:private conn nil)
-(def ^:private schema nil)
 (def ^:private storage nil)
 
 (defn- datasource
@@ -39,8 +39,11 @@
                sqlite-storage)]
     (alter-var-root #'storage (constantly st))))
 
-(defn- create-conn [schema storage]
-  (alter-var-root #'conn (constantly (d/create-conn schema storage))))
+(defn- create-conn
+  ([schema]
+   (alter-var-root #'conn (constantly (d/create-conn schema))))
+  ([schema storage]
+   (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
@@ -60,9 +63,11 @@
 
 (defn start
   ([] (create-conn nil nil))
-  ([url] (if (exist? url)
-           (restore-conn (make-storage url))
-           (create-conn nil {:storage (make-storage url)}))))
+  ([schema] (create-conn schema nil))
+  ([schema url]
+   (if (exist? url)
+     (restore-conn (make-storage url))
+     (create-conn schema {:storage (make-storage url)}))))
 
 (defn stop []
   (close-conn))
@@ -75,14 +80,18 @@
 
 ;;-----------------------------
 
-(defn- shorten
-  ([s] (shorten s 20))
+(defn- abbrev
+  ([s] (abbrev s 80))
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
 
-(defmacro q [query & inputs]
-  (t/log! :info (str "q " (shorten query)))
-  `(d/q ~query @conn ~@inputs))
+; (defmacro q [query & inputs]
+;   (t/log! :info (str "q " query))
+;   `(d/q ~query @conn ~@inputs))
+
+(defn q [query & inputs]
+  (t/log! :info (str "q " query))
+  (apply d/q query @conn inputs))
 
 (defn entity [id]
   (d/entity @conn id))
@@ -94,14 +103,5 @@
    (d/pull @conn selector eid)))
 
 (defn puts! [facts]
-  (t/log! :info (str "puts " (shorten facts)))
+  (t/log! :info (str "puts " (abbrev facts)))
   (d/transact! conn facts))
-
-(comment
-  (d/pull @conn '[*] 1)
-  (d/pull @conn ['*] 1)
-  (d/pull @conn '[:age] 1)
-  (d/pull @conn [':age] 1)
-  (get (d/entity @conn 1) :age)
-  (get (entity 1) :name)
-  :rcf)
