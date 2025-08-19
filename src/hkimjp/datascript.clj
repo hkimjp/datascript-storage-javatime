@@ -5,7 +5,8 @@
    [datascript.core :as d]
    [datascript.storage.sql.core :as storage-sql]
    [fast-edn.core :refer [read-string]]
-   [time-literals.read-write :as rw]))
+   [time-literals.read-write :as rw]
+   [taoensso.telemere :as t]))
 
 (time-literals.read-write/print-time-literals-clj!)
 
@@ -55,7 +56,7 @@
   (let [[_ _ path] (str/split url #":")]
     (.exists (java.io.File. path))))
 
-;;---------
+;; ------------------------------
 
 (defn start
   ([] (create-conn nil nil))
@@ -71,3 +72,36 @@
 
 (defn gc []
   (d/collect-garbage storage))
+
+;;-----------------------------
+
+(defn- shorten
+  ([s] (shorten s 20))
+  ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
+           (str/replace-first s pat "$1..."))))
+
+(defmacro q [query & inputs]
+  (t/log! :info (str "q " (shorten query)))
+  `(d/q ~query @conn ~@inputs))
+
+(defn entity [id]
+  (d/entity @conn id))
+
+(defn pull
+  ([eid] (pull ['*] eid))
+  ([selector eid]
+   (t/log! :info (str "pull " selector " " eid))
+   (d/pull @conn selector eid)))
+
+(defn puts! [facts]
+  (t/log! :info (str "puts " (shorten facts)))
+  (d/transact! conn facts))
+
+(comment
+  (d/pull @conn '[*] 1)
+  (d/pull @conn ['*] 1)
+  (d/pull @conn '[:age] 1)
+  (d/pull @conn [':age] 1)
+  (get (d/entity @conn 1) :age)
+  (get (entity 1) :name)
+  :rcf)

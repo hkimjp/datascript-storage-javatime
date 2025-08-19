@@ -1,6 +1,5 @@
 (ns user
   (:require
-   [datascript.core :as d]
    [hkimjp.datascript :as ds :refer [start stop gc conn?]]
    [java-time.api :as jt]))
 
@@ -15,69 +14,27 @@
   :rcf)
 ;;------
 
-(comment
-  (conn?)
-  (def conn (start))
-  (conn?)
+(start)
+(ds/puts [{:db/id -1, :greeting "hello"}
+          {:db/id -1, :name "hiroshi"}
+          {:db/id -1, :age 63}])
+(ds/q '[:find ?e ?greeting ?to
+        :where
+        [?e :greeting ?greeting]
+        [?e :name ?to]])
 
-  (d/transact! conn [{:db/id -1, :greeting "hello"}])
-  (d/q '[:find ?eid ?greeting
-         :where
-         [?eid :greeting ?greeting]]
-       @conn)
+(ds/pull 1)
+(ds/pull 2)
+(ds/pull 3)
+(ds/q '[:find ?e ?name ?to
+        :where
+        [?e :name ?name]
+        [?e :greeting ?to]])
+(ds/q '[:find ?age
+        :in $ ?name
+        :where
+        [?e :name ?name]
+        [?e :age ?age]]
+      "hiroshi")
 
-  (d/q '[:find ?eid ?attr ?hello
-         :in $ ?attr
-         :where
-         [?eid ?attr ?hello]]
-       @conn :greeting)
-
-  (def url "jdbc:sqlite:data/db.sqlite")
-
-  (conn?)
-  (def conn (start url))
-  (conn?)
-
-  (d/q '[:find ?e ?time
-         :where
-         [?e :time ?time]]
-       @conn)
-
-  (d/transact! conn [{:db/id -1, :time (java.util.Date.)}])
-  (d/transact! conn [{:db/id -1, :time (jt/local-date-time)}])
-
-  (stop)
-
-  (conn?)
-
-  (def conn (start url))
-
-  (stop)
-
-  (def conn (start))
-
-  (d/transact! conn [{:db/id -1, :name "bonbay sapphire"}])
-  (d/transact! conn [{:db/id -1, :date (jt/local-date)}])
-  (d/transact! conn [{:db/id -1, :name "deacon" :date (jt/local-date)}])
-
-  (d/q '[:find ?e
-         :where
-         [?e _ _]]
-       @conn)
-
-  (d/q '[:find ?e ?time ?name
-         :keys id time name
-         :in $ ?name
-         :where
-         [?e :date ?time]]
-       @conn
-       ["daecon" "bonbay sapphire"])
-
-  (d/pull @conn '[*] 3)
-
-  (jt/plus (:time (d/pull @conn '[*] 2) (jt/days 1)))
-
-  (gc)
-
-  (stop)
-  :rcf)
+(stop)
