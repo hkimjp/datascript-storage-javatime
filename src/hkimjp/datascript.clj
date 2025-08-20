@@ -83,7 +83,7 @@
            (str/replace-first s pat "$1..."))))
 
 (defmacro q [query & inputs]
-  (t/log! :info (str "q " (shorten query)))
+  (t/log! :info (str "q " query))
   `(d/q ~query @conn ~@inputs))
 
 (defn entity [id]
