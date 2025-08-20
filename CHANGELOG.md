@@ -1,4 +1,4 @@
-## 0.4-SNAPSHOT
+## 0.4.76 (2025-08-20)
 
 - CHANGED repository name `datascript-storage-javatime`
 - improved README.md.
