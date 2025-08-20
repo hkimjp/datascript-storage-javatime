@@ -1,12 +1,11 @@
 (ns user
   (:require
    [hkimjp.datascript :as ds :refer [start stop gc conn?]]
+   [clj-reload.core :as reload]
    [java-time.api :as jt]))
 
 ;;------
 (comment
-  (require '[clj-reload.core :as reload])
-
   (reload/init
    {:dirs ["src" "dev" "test"]})
 
@@ -14,27 +13,51 @@
   :rcf)
 ;;------
 
-(start)
-(ds/puts [{:db/id -1, :greeting "hello"}
-          {:db/id -1, :name "hiroshi"}
-          {:db/id -1, :age 63}])
-(ds/q '[:find ?e ?greeting ?to
-        :where
-        [?e :greeting ?greeting]
-        [?e :name ?to]])
+(comment
 
-(ds/pull 1)
-(ds/pull 2)
-(ds/pull 3)
-(ds/q '[:find ?e ?name ?to
-        :where
-        [?e :name ?name]
-        [?e :greeting ?to]])
-(ds/q '[:find ?age
-        :in $ ?name
-        :where
-        [?e :name ?name]
-        [?e :age ?age]]
-      "hiroshi")
+  (defn f
+    ([] (f {}))
+    ([{:keys [schema storage]}]
+     [schema storage]))
 
-(stop)
+  (f {:schema 1 :storage 2})
+  ;; => [1 2]
+  (f)
+  ;; => [nil nil]
+  :rcf)
+
+;;------
+
+(comment
+
+  (start)
+
+  (ds/puts! [{:db/id 250, :name "250", :friends 251}
+             {:db/id 251, :name "251"}])
+
+  (ds/q '[:find ?f
+          :where
+          [?e :name "250"]
+          [?e :friends ?f]])
+
+  (get (ds/entity 11) :friends)
+  (stop)
+  (conn?)
+
+  :rcf)
+
+;;-----
+(comment
+  (def schema {:aka {:db/cardinality :db.cardinality/many}})
+
+  (start schema)
+
+  (ds/puts! [{:db/id -1
+              :name  "Maksim"
+              :age   45
+              :aka   ["Max Otto von Stierlitz", "Jack Ryan"]}])
+  (ds/q '[:find  ?n ?a
+          :where [?e :aka "Max Otto von Stierlitz"]
+          [?e :name ?n]
+          [?e :age  ?a]])
+  :rcf)
