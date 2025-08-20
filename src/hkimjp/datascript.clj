@@ -85,9 +85,10 @@
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
 
-; (defmacro q [query & inputs]
-;   (t/log! :info (str "q " query))
-;   `(d/q ~query @conn ~@inputs))
+;; this did not work with private conn.
+;; (defmacro q [query & inputs]
+;;   (t/log! :info (str "q " query))
+;;   `(d/q ~query @conn ~@inputs))
 
 (defn q [query & inputs]
   (t/log! :info (str "q " query))

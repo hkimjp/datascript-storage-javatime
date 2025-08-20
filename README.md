@@ -1,10 +1,10 @@
-# datascript-storage
+# datascript-storage-javatime
 
-Datascript + Sqlite backend.
+Datascript + Sqlite backend with java-time support.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.
 However, I could not store java-time objects onto it.
-Henryw374's `com.widdindustries/time-literals` solved the situation.
+Henryw374's `com.widdindustries/time-literals` solved this issue.
 I much thank you two.
 
 ## Installation
@@ -23,7 +23,7 @@ Start REPL as;
 Then connect your REPL client.
 
     ❯ trench -p `cat .nrepl-port`
-    user=> (require '[datascript.core :as ds])
+    user=> (require '[hkimjp.datascript :as ds])
     nil
 
 In my case, using tonsky's clojure+ with Sublime.
