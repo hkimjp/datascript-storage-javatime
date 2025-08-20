@@ -12,7 +12,7 @@ I much thank you two.
 deps.edn:
 ```
 io.github.hkimjp/datascript-storage-javatime
-{:git/tag "0.4.66" :git/sha "846ed5a"}
+{:git/tag "0.4.76" :git/sha "7bc6a22"}
 ```
 
 ## Usage
