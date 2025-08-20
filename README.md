@@ -11,7 +11,8 @@ I much thank you two.
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage {:git/tag "0.4.66" :git/sha "846ed5a"}
+io.github.hkimjp/datascript-storage-javatime
+{:git/tag "0.4.66" :git/sha "846ed5a"}
 ```
 
 ## Usage
@@ -26,26 +27,38 @@ Then connect your REPL client.
     user=> (require '[hkimjp.datascript :as ds])
     nil
 
-In my case, using tonsky's clojure+ with Sublime.
-Of course, powered by Clojure Sublimed.
-
 ## Examples
 
     user=> (require '[java-time.api :as jt])
-    nil
+    user=> (def schema nil)
+    user=> (def db-uri "jdbc:sqlite:data/db.sqlite")
+    user=> (ds/start schema db-uri)
     user=> (ds/puts! [{:db/id -1, :time (jt/local-date-time)}])
     user=> (ds/q '[:find ?time
                   :where
                   [_ :time ?time]])
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=> (ds/stop)
-    nil
-    user=> (ds/start "jdbc:sqlite:data/db.sqlite")
+    user=> (ds/conn?)
+    false
+    user=> (ds/start schema db-uri)
     user=> (ds/q '[:find ?time
                   :where
                   [_ :time ?time]])
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
+
+* data folder must exist before starting
+* `schema` is ignored in latter `(start schema db-uri)` call.
+  should define other function like `restore`?
+
+
+| use case                       | choose                           | java-time |
+| ------------------------------ | -------------------------------- | --------- |
+| on-memory                      | datascript                       | OK |
+| durable storage                | datascript + datascript-storage-sql        | NG |
+| durable storage, use java-time | datascript-storage-javatime      | OK |
+
 
 ### Bugs
 
