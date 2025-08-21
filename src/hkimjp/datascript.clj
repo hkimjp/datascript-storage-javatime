@@ -10,8 +10,7 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
-;; private?
-(def ^:private conn nil)
+(def conn nil)
 (def ^:private storage nil)
 
 (defn- datasource
@@ -92,7 +91,11 @@
 
 (defn q [query & inputs]
   (t/log! :info (str "q " query))
-  (apply d/q query @conn inputs))
+  `(d/q ~query @conn ~@inputs))
+
+;; (defn q [query & inputs]
+;;   (t/log! :info (str "q " query))
+;;   (apply d/q query @conn inputs))
 
 (defn entity [id]
   (d/entity @conn id))
