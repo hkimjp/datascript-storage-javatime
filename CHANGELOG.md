@@ -1,9 +1,9 @@
-## 0.4.76 (2025-08-20)
+# 0.4.76 (2025-08-20)
 
 - CHANGED repository name `datascript-storage-javatime`
 - improved README.md.
 
-## 0.4.66 (2025-08-19)
+# 0.4.66 (2025-08-19)
 
 - changed (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.
