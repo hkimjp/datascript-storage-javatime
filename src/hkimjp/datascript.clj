@@ -68,12 +68,15 @@
 ;;      (restore-conn (make-storage url))
 ;;      (create-conn schema {:storage (make-storage url)}))))
 
+(defn restore [url]
+  (restore-conn (make-storage url)))
+
 (defn start
   ([] (create-conn nil nil))
   ([{:keys [schema url]}]
    (cond
      (nil? url) (create-conn schema)
-     (exist? url) (restore-conn (make-storage url))
+     (exist? url) (restore url)
      :else (create-conn schema {:storage (make-storage url)}))))
 
 (defn stop []
