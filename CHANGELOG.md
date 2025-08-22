@@ -14,7 +14,7 @@
 - improved README.md.
 - CHANGED ds/conn resumed to public.
 
-## 0.4.66 (2025-08-19)
+# 0.4.66 (2025-08-19)
 
 - CHANGED (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.
