@@ -10,9 +10,8 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
-;; private?
-(def ^:private conn nil)
-(def ^:private storage nil)
+(def conn nil)
+(def storage nil)
 
 (defn- datasource
   ([] (datasource "jdbc:sqlite:data/db.sqlite"))
@@ -61,13 +60,24 @@
 
 ;; ------------------------------
 
+;; (defn start
+;;   ([] (create-conn nil nil))
+;;   ([schema] (create-conn schema nil))
+;;   ([schema url]
+;;    (if (exist? url)
+;;      (restore-conn (make-storage url))
+;;      (create-conn schema {:storage (make-storage url)}))))
+
+(defn restore [url]
+  (restore-conn (make-storage url)))
+
 (defn start
   ([] (create-conn nil nil))
-  ([schema] (create-conn schema nil))
-  ([schema url]
-   (if (exist? url)
-     (restore-conn (make-storage url))
-     (create-conn schema {:storage (make-storage url)}))))
+  ([{:keys [schema url]}]
+   (cond
+     (nil? url) (create-conn schema)
+     (exist? url) (restore url)
+     :else (create-conn schema {:storage (make-storage url)}))))
 
 (defn stop []
   (close-conn))
@@ -76,16 +86,18 @@
   (d/conn? conn))
 
 (defn gc []
-  (d/collect-garbage storage))
+  (when (some? storage)
+    (d/collect-garbage storage)))
 
 ;;-----------------------------
 
 (defn- abbrev
+  "shorten string for concise log."
   ([s] (abbrev s 80))
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
 
-;; this did not work with private conn.
+;; this did not work with (def ^:private conn nil)
 ;; (defmacro q [query & inputs]
 ;;   (t/log! :info (str "q " query))
 ;;   `(d/q ~query @conn ~@inputs))

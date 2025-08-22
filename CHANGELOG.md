@@ -1,38 +1,49 @@
-# 0.4.76 (2025-08-20)
+# Datascript-Storage-Javatime
 
+## Unreleased
+
+## 0.6-SNAPSHOT
+
+- (restore url) - same with (start {:url url})
+
+## 0.5.83 (2025-08-22)
+
+- **BREAKING** (start) or (start {:schema schema :url url})
+- FIXED: (gc) does not start with on-memory database.
 - CHANGED repository name `datascript-storage-javatime`
 - improved README.md.
+- CHANGED ds/conn resumed to public.
 
 # 0.4.66 (2025-08-19)
 
-- changed (start) or (start schema storage) - if exists `storage`,
+- CHANGED (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.
-- changed `ds/q` - defined as a function not a macro.
+- CHANGED `ds/q` - defined as a function not a macro.
 - conn and storage are privare.
 - in a single transaction, negative db/id keep consistent?
-- changed create-conn - multi arity function.
+- CHANGED create-conn - multi arity function.
 
 
-# 0.3.54 (2025-08-19)
+## 0.3.54 (2025-08-19)
 
 - {:git/tag :git/sha} - use `git show-ref --abbrev=7 --tags`
 - convenience funcitons - q, entity, pull, puts
 - usage entity
 
-# 0.2.31 (2025-08-19)
+## 0.2.31 (2025-08-19)
 
 - imporved `README.md`
 
-# 0.2.30 (2025-08-17)
+## 0.2.30 (2025-08-17)
 
 - only `start`, `stop`, `conn?`, `gc` are public
 - removed `clj-reload` from dependency
 
-# 0.2.29 (2025-08-11)
+## 0.2.29 (2025-08-11)
 
 - improved README.md
 
-# 0.2.24 (2025-08-11)
+## 0.2.24 (2025-08-11)
 
 - fixed: once closed the connection, can not reconnect in a same session.
   after restarting clojure, it's OK.
@@ -46,7 +57,7 @@ because the return value of \"clojure.lang.Var.getRawRoot()\" is null"
   Compiler$DefExpr.eval           Compiler.java 464
 ```
 
-# 0.2.0 (2025-08-11)
+## 0.2.0 (2025-08-11)
 
 - improved `deps.edn`
 - fixed .gitignore - incldue /data/.keep, ignore /data/*
@@ -61,7 +72,7 @@ because the return value of \"clojure.lang.Var.getRawRoot()\" is null"
   https://github.com/hkimjp/datascript-stroage
 ```
 
-# 0.1.0 (2025-07-31)
+## 0.1.0 (2025-07-31)
 
 - sucessed java-time objects roundtrip by `time-literals.read-write`.
 
