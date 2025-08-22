@@ -1,6 +1,6 @@
 # Unreleased
 
-# 0.5-SNAPSHOT
+## 0.5.83 (2025-08-22)
 
 - **BREAKING** (start) or (start {:schema schema :url url})
 - FIXED: (gc) does not start with on-memory database.
