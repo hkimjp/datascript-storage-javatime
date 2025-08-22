@@ -2,6 +2,8 @@
 
 # 0.5-SNAPSHOT
 
+- **BREAKING** (start) or (start {:schema schema :url url})
+- FIXED: (gc) does not start with on-memory database.
 - CHANGED repository name `datascript-storage-javatime`
 - improved README.md.
 - CHANGED ds/conn resumed to public.
