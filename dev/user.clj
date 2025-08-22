@@ -1,6 +1,6 @@
 (ns user
   (:require
-   [hkimjp.datascript :as ds :refer [start stop gc conn?]]
+   [hkimjp.datascript :as ds :refer [start stop gc conn? restore]]
    [clj-reload.core :as reload]
    [java-time.api :as jt]))
 
@@ -58,8 +58,13 @@
   :rcf)
 ;;-----
 (comment
-  (start {:url "jdbc:sqlite:storage/db.sqlite"})
+
+  (def url "jdbc:sqlite:storage/db.sqlite")
+
+  (start {:url url})
+
   (ds/puts! [{:db/id -1, :now (jt/instant)}])
+
   (-> (ds/q '[:find ?e ?time
               :keys e   time
               :where
@@ -69,5 +74,17 @@
       str)
 
   (stop)
+
   (conn?)
+
+  (restore url)
+
+  (-> (ds/q '[:find ?e ?time
+              :keys e   time
+              :where
+              [?e :now ?time]])
+      first
+      :time
+      str)
+
   :rcf)

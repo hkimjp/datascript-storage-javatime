@@ -14,7 +14,7 @@ I added some simple convenience functions for my own use.
 deps.edn:
 ```
 io.github.hkimjp/datascript-storage-javatime
-{:git/tag "0.4.76" :git/sha "7bc6a22"}
+{:git/tag "0.5.83" :git/sha "cc558ef"}
 ```
 
 ## Usage
@@ -33,8 +33,8 @@ Then connect your REPL client.
 
     user=> (require '[java-time.api :as jt])
     user=> (def schema nil)
-    user=> (def db-uri "jdbc:sqlite:data/db.sqlite")
-    user=> (ds/start schema db-uri)
+    user=> (def db-url "jdbc:sqlite:storage/db.sqlite")
+    user=> (ds/start {:schema schema :url db-url})
     user=> (ds/puts! [{:db/id -1, :time (jt/local-date-time)}])
     user=> (ds/q '[:find ?time
                   :where
@@ -43,16 +43,16 @@ Then connect your REPL client.
     user=> (ds/stop)
     user=> (ds/conn?)
     false
-    user=> (ds/start schema db-uri)
+    user=> (ds/start schema db-url)
     user=> (ds/q '[:find ?time
                   :where
                   [_ :time ?time]])
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
 
-* data folder must exist before starting
-* `schema` is ignored in latter `(start schema db-uri)` call.
-  should define other function like `restore`?
+* storage folder must exist before starting
+* `schema` is ignored in latter `(start schema db-url)` call.
+  should define other function like `(restore db-url)`?
 
 
 | use case                       | choose                           | java-time |
