@@ -7,6 +7,8 @@ However, I could not store java-time objects onto it.
 Henryw374's `com.widdindustries/time-literals` solved this issue.
 I much thank you two.
 
+I added some simple convenience functions for my own use.
+
 ## Installation
 
 deps.edn:
