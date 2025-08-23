@@ -19,7 +19,7 @@
 
   (def now (jt/instant))
 
-  (gc)
+  (ds/gc)
 
   (ds/puts! [{:db/id 250, :name "250", :friends 251}
              {:db/id 251, :name "251"}])
@@ -31,9 +31,9 @@
 
   (get (ds/entity 11) :friends)
 
-  (stop)
+  (ds/stop)
 
-  (conn?)
+  (ds/conn?)
 
   :rcf)
 
