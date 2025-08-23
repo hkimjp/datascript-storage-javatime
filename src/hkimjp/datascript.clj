@@ -118,3 +118,5 @@
 (defn puts! [facts]
   (t/log! :info (str "puts " (abbrev facts)))
   (d/transact! conn facts))
+
+(defn -main [&args])
