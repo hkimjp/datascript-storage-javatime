@@ -1,9 +1,9 @@
 # Unreleased
 
-- bin/datascript - jar?
+- bin/datascript - jar? -- create ds-client.
 
 
-## 0.5.101 (2025-08-23)
+# 0.5.101 (2025-08-23)
 
 - (restore url) - same with (start {:url url})
 
@@ -23,7 +23,6 @@
 - conn and storage are privare.
 - in a single transaction, negative db/id keep consistent?
 - CHANGED create-conn - multi arity function.
-
 
 # 0.3.54 (2025-08-19)
 
