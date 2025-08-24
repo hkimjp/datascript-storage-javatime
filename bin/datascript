@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
-cd ~/clojure/datascript-storage
+cd ~/clojure/datascript-storage-javatime
 clj -M:dev:nrepl --interactive
-

@@ -1,21 +1,28 @@
-# Datascript-Storage-JavaTime
+# Unreleased
 
-## Unreleased
+- bin/datascript - jar? -- create ds-client.
 
-## 0.4.76 (2025-08-20)
 
+# 0.5.101 (2025-08-23)
+
+- (restore url) - same with (start {:url url})
+
+# 0.5.83 (2025-08-22)
+
+- **BREAKING** (start) or (start {:schema schema :url url})
+- FIXED: (gc) does not start with on-memory database.
 - CHANGED repository name `datascript-storage-javatime`
 - improved README.md.
+- CHANGED ds/conn resumed to public.
 
-## 0.4.66 (2025-08-19)
+# 0.4.66 (2025-08-19)
 
-- changed (start) or (start schema storage) - if exists `storage`,
+- CHANGED (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.
-- changed `ds/q` - defined as a function not a macro.
+- CHANGED `ds/q` - defined as a function not a macro.
 - conn and storage are privare.
 - in a single transaction, negative db/id keep consistent?
-- changed create-conn - multi arity function.
-
+- CHANGED create-conn - multi arity function.
 
 # 0.3.54 (2025-08-19)
 
