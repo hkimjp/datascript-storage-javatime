@@ -10,11 +10,12 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
+;; ^:private
 (def conn nil)
 (def storage nil)
 
 (defn- datasource
-  ([] (datasource "jdbc:sqlite:data/db.sqlite"))
+  ([] (datasource "jdbc:sqlite:storage/db.sqlite"))
   ([url]
    (doto (org.sqlite.SQLiteDataSource.)
      (.setUrl url))))
@@ -23,7 +24,6 @@
   [ds]
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
-;; currently sqlite3 only
 (defn- sqlite-storage
   [datasource]
   (storage-sql/make datasource
@@ -60,14 +60,6 @@
 
 ;; ------------------------------
 
-;; (defn start
-;;   ([] (create-conn nil nil))
-;;   ([schema] (create-conn schema nil))
-;;   ([schema url]
-;;    (if (exist? url)
-;;      (restore-conn (make-storage url))
-;;      (create-conn schema {:storage (make-storage url)}))))
-
 (defn restore [url]
   (restore-conn (make-storage url)))
 
@@ -97,7 +89,7 @@
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
 
-;; this did not work with (def ^:private conn nil)
+;; FIXME: this did not work with (def ^:private conn nil)
 ;; (defmacro q [query & inputs]
 ;;   (t/log! :info (str "q " query))
 ;;   `(d/q ~query @conn ~@inputs))
@@ -115,8 +107,9 @@
    (t/log! :info (str "pull " selector " " eid))
    (d/pull @conn selector eid)))
 
-(defn puts! [facts]
+(defn transact! [facts]
   (t/log! :info (str "puts " (abbrev facts)))
   (d/transact! conn facts))
 
-(defn -main [&args])
+(def puts! transact!)
+;;-------------------
