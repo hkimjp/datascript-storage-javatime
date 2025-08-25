@@ -1,10 +1,7 @@
 # Unreleased
 
-- check (gc)
+# 0.5-SNAPSHOT
 
-# SNAPSHOT
-
-- client
 
 # 0.5.101 (2025-08-23)
 
