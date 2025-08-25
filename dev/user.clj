@@ -19,8 +19,6 @@
 
   (def now (jt/instant))
 
-  (ds/gc)
-
   (ds/puts! [{:db/id 250, :name "250", :friends 251}
              {:db/id 251, :name "251"}])
 
