@@ -1,7 +1,11 @@
 # Unreleased
 
-- bin/datascript - jar? -- create ds-client.
+- create ds-client.
+- on-memory (gc) works?
 
+# 0.6-SNAPSHOT
+
+- removed `resources` from `:paths`.
 
 # 0.5.101 (2025-08-23)
 
