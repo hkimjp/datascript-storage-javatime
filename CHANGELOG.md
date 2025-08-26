@@ -1,7 +1,13 @@
 # Unreleased
 
-# 0.5.110 (2025-08-25)
+- create ds-client.
+- on-memory (gc) works?
 
+# 0.6.119 (2025-08-26)
+
+- **BREAKING** wrappers and aliases.
+- default storage is saved at `resources/db.sqlite`.
+- removed `resources` from `:paths`.
 
 # 0.5.101 (2025-08-23)
 

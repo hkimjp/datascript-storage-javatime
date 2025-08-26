@@ -1,5 +1,6 @@
 # datascript-storage-javatime
 
+My private datascript wrapper.
 Datascript + Sqlite backend with java-time support.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.

@@ -10,12 +10,11 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
-;; ^:private
 (def conn nil)
 (def storage nil)
 
 (defn- datasource
-  ([] (datasource "jdbc:sqlite:storage/db.sqlite"))
+  ([] (datasource "jdbc:sqlite:resources/db.sqlite"))
   ([url]
    (doto (org.sqlite.SQLiteDataSource.)
      (.setUrl url))))
@@ -58,7 +57,7 @@
   (let [[_ _ path] (str/split url #":")]
     (.exists (java.io.File. path))))
 
-;; ------------------------------
+;; ---------------------------------
 
 (defn restore [url]
   (restore-conn (make-storage url)))
@@ -81,7 +80,7 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;;-----------------------------
+;;-------------------------------
 
 (defn- abbrev
   "shorten string for concise log."
@@ -90,26 +89,34 @@
            (str/replace-first s pat "$1..."))))
 
 ;; FIXME: this did not work with (def ^:private conn nil)
-;; (defmacro q [query & inputs]
+;; (defmacro qq [query & inputs]
 ;;   (t/log! :info (str "q " query))
 ;;   `(d/q ~query @conn ~@inputs))
 
-(defn q [query & inputs]
+(defn qq [query & inputs]
   (t/log! :info (str "q " query))
   (apply d/q query @conn inputs))
 
-(defn entity [id]
-  (d/entity @conn id))
+(defn puts! [facts]
+  (t/log! :info (str "puts " (abbrev facts)))
+  (d/transact! conn facts))
 
-(defn pull
-  ([eid] (pull ['*] eid))
+(defn pl
+  ([eid] (pl ['*] eid))
   ([selector eid]
    (t/log! :info (str "pull " selector " " eid))
    (d/pull @conn selector eid)))
 
-(defn transact! [facts]
-  (t/log! :info (str "puts " (abbrev facts)))
-  (d/transact! conn facts))
+(defn et [id]
+  (d/entity @conn id))
 
-(def puts! transact!)
-;;-------------------
+;;-------------------------
+
+(def transact! d/transact!)
+
+(def q d/q)
+
+(def pull d/pull)
+
+(def entity d/entity)
+
