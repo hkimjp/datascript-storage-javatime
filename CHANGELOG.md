@@ -3,7 +3,7 @@
 - create ds-client.
 - on-memory (gc) works?
 
-# 0.6-SNAPSHOT
+# 0.6.119 (2025-08-26)
 
 - **BREAKING** wrappers and aliases.
 - default storage is saved at `resources/db.sqlite`.
