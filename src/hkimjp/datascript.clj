@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(time-literals.read-write/print-time-literals-clj!)
+(time-literals.read-write/print-time-literals-clj!) ;
 
 (def conn nil)
 (def storage nil)
@@ -27,8 +27,8 @@
   [datasource]
   (storage-sql/make datasource
                     {:dbtype     :sqlite
-                     :freeze-str pr-str
-                     :thaw-str   #(read-string {:readers rw/tags} %)}))
+                     :freeze-str pr-str                                 ;
+                     :thaw-str   #(read-string {:readers rw/tags} %)})) ;
 
 (defn- make-storage [url]
   (let [st (-> url
