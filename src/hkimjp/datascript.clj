@@ -10,11 +10,12 @@
 
 (time-literals.read-write/print-time-literals-clj!)
 
+;; ^:private
 (def conn nil)
 (def storage nil)
 
 (defn- datasource
-  ([] (datasource "jdbc:sqlite:data/db.sqlite"))
+  ([] (datasource "jdbc:sqlite:storage/db.sqlite"))
   ([url]
    (doto (org.sqlite.SQLiteDataSource.)
      (.setUrl url))))
@@ -111,5 +112,4 @@
   (d/transact! conn facts))
 
 (def puts! transact!)
-
 ;;-------------------

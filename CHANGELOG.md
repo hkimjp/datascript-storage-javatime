@@ -9,13 +9,13 @@
 
 # 0.5.101 (2025-08-23)
 
-- (restore url) - same with (start {:url url})
+- (restore url) is a short form of (start {:url url})
 
 # 0.5.83 (2025-08-22)
 
-- **BREAKING** (start) or (start {:schema schema :url url})
-- FIXED: (gc) does not start with on-memory database.
-- CHANGED repository name `datascript-storage-javatime`
+- **BREAKING** (start) takes option. (start {:schema schema :url url})
+- (gc) does not start on-memory mode.
+- CHANGED repository `datascript-storage-javatime`.
 - improved README.md.
 - CHANGED ds/conn resumed to public.
 
