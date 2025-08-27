@@ -8,12 +8,8 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(time-literals.read-write/print-time-literals-clj!)
-
 (def conn nil)
-
 (def storage nil)
-
 (def default-storage-url "jdbc:sqlite:resources/db.sqlite")
 
 (defn- datasource
@@ -24,6 +20,8 @@
 (defn- pooled-datasource
   [ds]
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
+
+(time-literals.read-write/print-time-literals-clj!)
 
 (defn- sqlite-storage
   [datasource]
@@ -97,7 +95,7 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;; indirect or proxy functions? how to call them?
+;; how to call them? indirect or proxy functions?
 
 (def transact! d/transact!)
 
