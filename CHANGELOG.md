@@ -1,6 +1,9 @@
 # Unreleased
 
-- In next release, I will resume to MAJOR.MINOR.PATCH.
+
+# 0.7-SNAPSHOT
+
+- resumed to MAJOR.MINOR.PATCH.
   It is hard to detect how many improvements have done
   in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
 

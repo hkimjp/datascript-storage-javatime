@@ -9,7 +9,9 @@
    [taoensso.telemere :as t]))
 
 (def conn nil)
+
 (def storage nil)
+
 (def default-storage-url "jdbc:sqlite:resources/db.sqlite")
 
 (defn- datasource
@@ -96,6 +98,7 @@
     (d/collect-garbage storage)))
 
 ;; how to call them? indirect or proxy functions?
+;; shadow functions?
 
 (def transact! d/transact!)
 
