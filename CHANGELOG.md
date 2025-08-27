@@ -1,10 +1,10 @@
 # Unreleased
 
 - In next release, I will resume to MAJOR.MINOR.PATCH.
-  It is hard to detect how many imporovements have done
+  It is hard to detect how many improvements have done
   in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
 
-# 0.6-SNAPSHOT
+# 0.6.138 (2025-08-27)
 
 - clojure 1.12.2
 
@@ -20,7 +20,7 @@
 
 - **BREAKING** wrappers and aliases.
 - default storage is saved at `resources/db.sqlite`.
-- removed `resources` from `:paths`.
+- removed `resources` from `:pdaths`.
 
 # 0.5.101 (2025-08-23)
 
