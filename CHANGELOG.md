@@ -4,7 +4,7 @@
 - resume to MAJOR.MINOR.PATCH. it is hard to detect how many imporovements
   have done in MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
 
-# 0.6-SNAPSHOT
+# 0.6.128 (2025-08-27)
 
 - refactored.
 - resumed - `resources` in `:path`.
