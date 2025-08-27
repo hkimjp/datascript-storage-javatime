@@ -4,7 +4,7 @@
   It is hard to detect how many improvements have done
   in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
 
-# 0.6-SNAPSHOT
+# 0.6.138 (2025-08-27)
 
 - clojure 1.12.2
 
