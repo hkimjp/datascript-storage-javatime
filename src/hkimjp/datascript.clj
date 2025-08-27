@@ -107,9 +107,6 @@
    (t/log! :info (str "pull " selector " " eid))
    (d/pull @conn selector eid)))
 
-(defn transact! [facts]
+(defn puts! [facts]
   (t/log! :info (str "puts " (abbrev facts)))
   (d/transact! conn facts))
-
-(def puts! transact!)
-;;-------------------
