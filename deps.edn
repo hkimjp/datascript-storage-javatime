@@ -13,7 +13,8 @@
  :aliases
  {:dev
   {:extra-paths ["dev"]
-   :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "0.9.8"}}
+   :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "0.9.8"}
+                 babashka/fs                 {:mvn/version "0.5.26"}}
    :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
                  "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
                  "--enable-native-access=ALL-UNNAMED"]}

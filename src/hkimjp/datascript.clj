@@ -33,6 +33,7 @@
                      :thaw-str   #(read-string {:readers rw/tags} %)}))
 
 (defn- make-storage [url]
+  (t/log! :info (str "make-storage " url))
   (let [url (or url default-storage-url)
         st (-> url
                datasource
@@ -42,8 +43,10 @@
 
 (defn- create-conn
   ([schema]
+   (t/log! :info (str "create-conn " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema))))
   ([schema storage]
+   (t/log! :info (str "create-conn " schema " with storage"))
    (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
@@ -62,17 +65,24 @@
   (try
     (let [[_ _ path] (str/split url #":")]
       (.exists (java.io.File. path)))
-    (catch Exception _
-      false)))
+    (catch Exception _ false)))
 
-(defn restore [url]
-  (if (exist? url)
-    (restore-conn (make-storage url))
-    (throw (Exception. (str "does not exist " url)))))
+(defn restore
+  ([] (restore default-storage-url))
+  ([url]
+   (t/log! :info (str "restore " url))
+   (if (exist? url)
+     (restore-conn (make-storage url))
+     (throw (Exception. (str "does not exist " url))))))
 
 (defn start
+  "If the :url argument is found and its value is nil, use the value of
+   `default-storage-url` instead of nil.
+   It is better to use (restore) or (restore storage-url) when restoring.
+   If you want an on-memory database, do not give the :url option."
   ([] (create-conn nil nil))
   ([{:keys [schema url] :as params}]
+   (t/log! :info (str "start " params))
    (if (contains? params :url)
      (create-conn schema {:storage (make-storage url)})
      (create-conn schema nil))))
