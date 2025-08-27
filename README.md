@@ -33,20 +33,22 @@ Then connect your REPL client.
 
     user=> (require '[java-time.api :as jt])
     user=> (def schema nil)
-    user=> (def db-url "jdbc:sqlite:storage/db.sqlite")
-    user=> (ds/start {:schema schema :url db-url})
-    user=> (ds/puts! [{:db/id -1, :time (jt/local-date-time)}])
+    user=> (def db-url "jdbc:sqlite:resources/db.sqlite")
+    user=> (def conn (ds/start {:schema schema :url db-url}))
+    user=> (ds/transact! conn [{:db/id -1, :time (jt/local-date-time)}])
     user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]])
+                  [_ :time ?time]]
+                  @conn)
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=> (ds/stop)
     user=> (ds/conn?)
     false
-    user=> (ds/start schema db-url)
+    user=> (def conn2 (ds/restart db-url))
     user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]])
+                  [_ :time ?time]]
+                  @conn2)
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
 

@@ -8,16 +8,18 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(time-literals.read-write/print-time-literals-clj!) ;
+(time-literals.read-write/print-time-literals-clj!)
 
 (def conn nil)
+
 (def storage nil)
 
+(def default-storage-url "jdbc:sqlite:resources/db.sqlite")
+
 (defn- datasource
-  ([] (datasource "jdbc:sqlite:resources/db.sqlite"))
-  ([url]
-   (doto (org.sqlite.SQLiteDataSource.)
-     (.setUrl url))))
+  [url]
+  (doto (org.sqlite.SQLiteDataSource.)
+    (.setUrl url)))
 
 (defn- pooled-datasource
   [ds]
@@ -27,11 +29,12 @@
   [datasource]
   (storage-sql/make datasource
                     {:dbtype     :sqlite
-                     :freeze-str pr-str                                 ;
-                     :thaw-str   #(read-string {:readers rw/tags} %)})) ;
+                     :freeze-str pr-str
+                     :thaw-str   #(read-string {:readers rw/tags} %)}))
 
 (defn- make-storage [url]
-  (let [st (-> url
+  (let [url (or url default-storage-url)
+        st (-> url
                datasource
                pooled-datasource
                sqlite-storage)]
@@ -53,22 +56,26 @@
   (when (some? conn)
     (alter-var-root #'conn (constantly nil))))
 
-(defn- exist? [url]
-  (let [[_ _ path] (str/split url #":")]
-    (.exists (java.io.File. path))))
-
 ;; ---------------------------------
 
+(defn- exist? [url]
+  (try
+    (let [[_ _ path] (str/split url #":")]
+      (.exists (java.io.File. path)))
+    (catch Exception _
+      false)))
+
 (defn restore [url]
-  (restore-conn (make-storage url)))
+  (if (exist? url)
+    (restore-conn (make-storage url))
+    (throw (Exception. (str "does not exist " url)))))
 
 (defn start
   ([] (create-conn nil nil))
-  ([{:keys [schema url]}]
-   (cond
-     (nil? url) (create-conn schema)
-     (exist? url) (restore url)
-     :else (create-conn schema {:storage (make-storage url)}))))
+  ([{:keys [schema url] :as params}]
+   (if (contains? params :url)
+     (create-conn schema {:storage (make-storage url)})
+     (create-conn schema nil))))
 
 (defn stop []
   (close-conn))
@@ -80,7 +87,17 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;;-------------------------------
+;; indirect or proxy functions? how to call them?
+
+(def transact! d/transact!)
+
+(def q d/q)
+
+(def pull d/pull)
+
+(def entity d/entity)
+
+;; convenience functions
 
 (defn- abbrev
   "shorten string for concise log."
@@ -109,13 +126,3 @@
 
 (defn et [id]
   (d/entity @conn id))
-
-;;-------------------------
-
-(def transact! d/transact!)
-
-(def q d/q)
-
-(def pull d/pull)
-
-(def entity d/entity)

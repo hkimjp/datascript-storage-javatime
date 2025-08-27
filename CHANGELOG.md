@@ -1,10 +1,14 @@
 # Unreleased
 
 - default storage path?
+- resume to MAJOR.MINOR.PATCH. it is hard to detect how many imporovements
+  have done in MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
 
 # 0.6-SNAPSHOT
 
+- refactored.
 - resumed - `resources` in `:path`.
+
 # 0.6.119 (2025-08-26)
 
 - **BREAKING** wrappers and aliases.
