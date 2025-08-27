@@ -76,8 +76,8 @@
 (defn start
   "If the :url argument is found and its value is nil, use the value of
    `default-storage-url` instead of nil.
-   It is better to use (restore) or (restore storage-url) when restoring.
-   If you want an on-memory database, do not give the :url option."
+   If you want an on-memory database, do not give the :url option.
+   Use (restore) or (restore storage-url) when restoring."
   ([] (create-conn nil nil))
   ([{:keys [schema url] :as params}]
    (t/log! :info (str "start " params))

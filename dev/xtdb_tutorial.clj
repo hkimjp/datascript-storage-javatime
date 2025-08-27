@@ -3,7 +3,7 @@
    [babashka.fs :as fs]
    [clojure.edn]
    [clojure.string :as str]
-   [hkimjp.datascript :as ds :refer [start restore stop transact! q]]))
+   [hkimjp.datascript :as ds :refer [start stop restore transact! q]]))
 
 ;; prep
 
