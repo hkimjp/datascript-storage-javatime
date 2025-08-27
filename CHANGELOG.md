@@ -1,8 +1,12 @@
 # Unreleased
 
-- In the next release, I will resume to MAJOR.MINOR.PATCH.
+- In next release, I will resume to MAJOR.MINOR.PATCH.
   It is hard to detect how many imporovements have done
   in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
+
+# 0.6-SNAPSHOT
+
+- clojure 1.12.2
 
 # 0.6.128 (2025-08-27)
 
