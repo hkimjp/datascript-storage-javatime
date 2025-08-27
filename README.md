@@ -1,5 +1,6 @@
 # datascript-storage-javatime
 
+My private datascript wrapper.
 Datascript + Sqlite backend with java-time support.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.
@@ -7,12 +8,13 @@ However, I could not store java-time objects onto it.
 Henryw374's `com.widdindustries/time-literals` solved this issue.
 I much thank you two.
 
+I added some simple convenience functions for my own use.
+
 ## Installation
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage-javatime
-{:git/tag "0.4.76" :git/sha "7bc6a22"}
+io.github.hkimjp/datascript-storage-javatime {:git/tag "0.6.119" :git/sha "6ec2c68"}
 ```
 
 ## Usage
@@ -31,26 +33,28 @@ Then connect your REPL client.
 
     user=> (require '[java-time.api :as jt])
     user=> (def schema nil)
-    user=> (def db-uri "jdbc:sqlite:data/db.sqlite")
-    user=> (ds/start schema db-uri)
-    user=> (ds/puts! [{:db/id -1, :time (jt/local-date-time)}])
+    user=> (def db-url "jdbc:sqlite:resources/db.sqlite")
+    user=> (def conn (ds/start {:schema schema :url db-url}))
+    user=> (ds/transact! conn [{:db/id -1, :time (jt/local-date-time)}])
     user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]])
+                  [_ :time ?time]]
+                  @conn)
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=> (ds/stop)
     user=> (ds/conn?)
     false
-    user=> (ds/start schema db-uri)
+    user=> (def conn2 (ds/restart db-url))
     user=> (ds/q '[:find ?time
                   :where
-                  [_ :time ?time]])
+                  [_ :time ?time]]
+                  @conn2)
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
 
-* data folder must exist before starting
-* `schema` is ignored in latter `(start schema db-uri)` call.
-  should define other function like `restore`?
+* storage folder must exist before starting
+* `schema` is ignored in latter `(start schema db-url)` call.
+  should define other function like `(restore db-url)`?
 
 
 | use case                       | choose                           | java-time |

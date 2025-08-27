@@ -1,17 +1,40 @@
-## 0.4.76 (2025-08-20)
+# Unreleased
 
-- CHANGED repository name `datascript-storage-javatime`
+- default storage path?
+- resume to MAJOR.MINOR.PATCH. it is hard to detect how many imporovements
+  have done in MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
+
+# 0.6.128 (2025-08-27)
+
+- refactored.
+- resumed - `resources` in `:path`.
+
+# 0.6.119 (2025-08-26)
+
+- **BREAKING** wrappers and aliases.
+- default storage is saved at `resources/db.sqlite`.
+- removed `resources` from `:paths`.
+
+# 0.5.101 (2025-08-23)
+
+- (restore url) is a short form of (start {:url url})
+
+# 0.5.83 (2025-08-22)
+
+- **BREAKING** (start) takes option. (start {:schema schema :url url})
+- (gc) does not start on-memory mode.
+- CHANGED repository `datascript-storage-javatime`.
 - improved README.md.
+- CHANGED ds/conn resumed to public.
 
-## 0.4.66 (2025-08-19)
+# 0.4.66 (2025-08-19)
 
-- changed (start) or (start schema storage) - if exists `storage`,
+- CHANGED (start) or (start schema storage) - if exists `storage`,
   ignores `schema`.
-- changed `ds/q` - defined as a function not a macro.
+- CHANGED `ds/q` - defined as a function not a macro.
 - conn and storage are privare.
 - in a single transaction, negative db/id keep consistent?
-- changed create-conn - multi arity function.
-
+- CHANGED create-conn - multi arity function.
 
 # 0.3.54 (2025-08-19)
 
