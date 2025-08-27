@@ -1,19 +1,26 @@
 # Unreleased
 
-- default storage path?
-- resume to MAJOR.MINOR.PATCH. it is hard to detect how many imporovements
-  have done in MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
+- In next release, I will resume to MAJOR.MINOR.PATCH.
+  It is hard to detect how many improvements have done
+  in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
+
+# 0.6.138 (2025-08-27)
+
+- clojure 1.12.2
 
 # 0.6.128 (2025-08-27)
 
 - refactored.
 - resumed - `resources` in `:path`.
+- default storage path.
+- included `dev/xtdb-tutorials.clj`.
+  copied from the nextjournal site, modified the xtdb/id to positive db/id.
 
 # 0.6.119 (2025-08-26)
 
 - **BREAKING** wrappers and aliases.
 - default storage is saved at `resources/db.sqlite`.
-- removed `resources` from `:paths`.
+- removed `resources` from `:pdaths`.
 
 # 0.5.101 (2025-08-23)
 

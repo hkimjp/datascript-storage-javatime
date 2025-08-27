@@ -44,7 +44,7 @@ Then connect your REPL client.
     user=> (ds/stop)
     user=> (ds/conn?)
     false
-    user=> (def conn2 (ds/restart db-url))
+    user=> (def conn2 (ds/restore db-url))
     user=> (ds/q '[:find ?time
                   :where
                   [_ :time ?time]]
@@ -52,9 +52,9 @@ Then connect your REPL client.
     #{[#time/date-time "2025-08-11T16:07:09.259732"]}
     user=>
 
-* storage folder must exist before starting
-* `schema` is ignored in latter `(start schema db-url)` call.
-  should define other function like `(restore db-url)`?
+* storage folder must exist before starting.
+* latter `(start schema db-url)` acts as `(restore db-url)`.
+  the schema is ignored.
 
 
 | use case                       | choose                           | java-time |
