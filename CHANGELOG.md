@@ -1,14 +1,13 @@
 # Unreleased
 
 
-
 # 0.7-SNAPSHOT
 
-- (necessary?) `puts!` - if the doc does not have :db/id, add `:db/id -1` to it.
 - resumed to MAJOR.MINOR.PATCH.
   it is hard to detect how many improvements have done
   in the MAJOR.MINOR starge using MAJOR.MINOR.COMMIT.
-- added bin/ds
+- changed `puts!` - if the doc does not have :db/id, add `:db/id -1` to it.
+- added `bin/ds`.
 
 # 0.6.138 (2025-08-27)
 

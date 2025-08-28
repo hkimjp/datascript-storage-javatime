@@ -98,6 +98,7 @@
     (d/collect-garbage storage)))
 
 ;; how to call them? indirect or proxy functions?
+;; shadow functions?
 
 (def transact! d/transact!)
 
