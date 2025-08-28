@@ -12,7 +12,7 @@
 
 (def storage nil)
 
-(def default-storage-url "jdbc:sqlite:resources/db.sqlite")
+(def default-storage-url "jdbc:sqlite:/tmp/db.sqlite")
 
 (defn- datasource
   [url]
@@ -69,7 +69,7 @@
 
 (defn restore
   ([] (restore default-storage-url))
-  ([url]
+  ([{:keys [url]}]
    (t/log! :info (str "restore " url))
    (if (exist? url)
      (restore-conn (make-storage url))
@@ -130,8 +130,12 @@
     fact
     (assoc fact :db/id -1)))
 
+(defn put! [fact]
+  (t/log! :info (str "put! " fact))
+  (d/transact! conn [(supply-id fact)]))
+
 (defn puts! [facts]
-  (t/log! :info (str "puts " (abbrev facts)))
+  (t/log! :info (str "puts! " (abbrev facts)))
   (d/transact! conn (map supply-id facts)))
 
 (defn pl

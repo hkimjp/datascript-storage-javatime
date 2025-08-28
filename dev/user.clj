@@ -13,9 +13,11 @@
 ; (reload/reload)
 
 ;;------
-(ds/start)
+(ds/start {:url nil})
 
 (ds/puts! [{:db/id -1, :name "hkimura"} {:age 63} {:favorite "honami"}])
+
+(ds/puts! [{:name "miyuki"} {:favorite "tenis"}])
 
 (ds/qq '[:find ?e ?name ?age ?like
          :where
@@ -23,7 +25,7 @@
          [?e :age ?age]
          [?e :favorite ?like]])
 
-(ds/pl 3)
+(ds/pl 1)
 
 (get (ds/et 1) :favorite)
 
@@ -36,3 +38,15 @@
                   [?e :wife ?wife]]
                 @conn "yuino"))
     ffirst)
+
+(ds/puts! [{:name "clojure"}])
+
+(ds/qq '[:find ?e
+         :where
+         [?e]])
+
+(ds/pl 4)
+
+(ds/stop)
+
+(ds/restore {:url "jdbc:sqlite:/tmp/db.sqlite"})
