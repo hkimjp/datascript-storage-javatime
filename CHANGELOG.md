@@ -1,8 +1,13 @@
 # Unreleased
 
-- In next release, I will resume to MAJOR.MINOR.PATCH.
-  It is hard to detect how many improvements have done
-  in the MAJOR.MINOR starge by using MAJOR.MINOR.COMMIT.
+
+# 0.7.0 (2025-08-28)
+
+- resumed to MAJOR.MINOR.PATCH.
+  it is hard to detect how many improvements have done
+  in the MAJOR.MINOR starge using MAJOR.MINOR.COMMIT.
+- changed `puts!` - if the doc does not have :db/id, add `:db/id -1` to it.
+- added `bin/ds`.
 
 # 0.6.138 (2025-08-27)
 

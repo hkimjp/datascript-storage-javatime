@@ -9,7 +9,9 @@
    [taoensso.telemere :as t]))
 
 (def conn nil)
+
 (def storage nil)
+
 (def default-storage-url "jdbc:sqlite:resources/db.sqlite")
 
 (defn- datasource
@@ -57,7 +59,7 @@
   (when (some? conn)
     (alter-var-root #'conn (constantly nil))))
 
-;; ---------------------------------
+;; -------------------------------------------
 
 (defn- exist? [url]
   (try
@@ -96,6 +98,7 @@
     (d/collect-garbage storage)))
 
 ;; how to call them? indirect or proxy functions?
+;; shadow functions?
 
 (def transact! d/transact!)
 
@@ -122,9 +125,14 @@
   (t/log! :info (str "q " query))
   (apply d/q query @conn inputs))
 
+(defn- supply-id [fact]
+  (if (:db/id fact)
+    fact
+    (assoc fact :db/id -1)))
+
 (defn puts! [facts]
   (t/log! :info (str "puts " (abbrev facts)))
-  (d/transact! conn facts))
+  (d/transact! conn (map supply-id facts)))
 
 (defn pl
   ([eid] (pl ['*] eid))
