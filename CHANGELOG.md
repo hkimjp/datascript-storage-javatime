@@ -7,8 +7,9 @@
 # 0.7.1-SNAPSHOT
 
 - addded - `put!`
-- changed/fixed - resume takes a map `(resume {:url url})`
 - changed - default-storage-url "/tmp/db.sqlite"
+- changed/fixed - resume takes a map `(resume {:url url})`
+- fixed - `(restore)` is an alias of `(resotore {:url default-storage-url})`
 
 # 0.7.0 (2025-08-28)
 

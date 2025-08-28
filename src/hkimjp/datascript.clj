@@ -68,7 +68,7 @@
     (catch Exception _ false)))
 
 (defn restore
-  ([] (restore default-storage-url))
+  ([] (restore {:url default-storage-url}))
   ([{:keys [url]}]
    (t/log! :info (str "restore " url))
    (if (exist? url)

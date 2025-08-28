@@ -49,4 +49,4 @@
 
 (ds/stop)
 
-(ds/restore {:url "jdbc:sqlite:/tmp/db.sqlite"})
+(ds/restore)
