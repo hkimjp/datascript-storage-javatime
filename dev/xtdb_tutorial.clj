@@ -31,6 +31,10 @@
   (ds/conn?)
   :rcf)
 
+(stop)
+
+;;------------------
+
 (def conn (restore))
 
 ;; tutorial starts
@@ -40,10 +44,14 @@
    @conn)
 
 ;; Q1.
-(into [] (q '[:find ?title
-              :where
-              [_ :movie/title ?title]]
-            @conn))
+(q '[:find ?title
+     :where
+     [_ :movie/title ?title]]
+   @conn)
+
+(ds/qq '[:find ?title
+         :where
+         [_ :movie/title ?title]])
 
 ;; Basic Queries
 (q '[:find ?title

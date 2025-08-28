@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "after REPL starts, do (require '[hkimjp.datascript :as ds])"
+clj -Sdeps '{:deps {io.github.hkimjp/datascript-storage-javatime {:git/tag "0.6.138" :git/sha "b8402b1"}}}' -A:dev
