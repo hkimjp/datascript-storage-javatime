@@ -1,7 +1,7 @@
 # Unreleased
 
 
-# 0.7-SNAPSHOT
+# 0.7.0 (2025-08-28)
 
 - resumed to MAJOR.MINOR.PATCH.
   it is hard to detect how many improvements have done
