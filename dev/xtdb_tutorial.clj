@@ -5,7 +5,7 @@
    [clojure.string :as str]
    [hkimjp.datascript :as ds :refer [start stop restore transact! q]]))
 
-;; prep
+;; prep -------------------------------
 
 (defn make-id-positive [infile outfile]
   (fs/write-lines
@@ -33,15 +33,23 @@
 
 (stop)
 
-;;------------------
+;; retart ----------
 
 (def conn (restore))
 
-;; tutorial starts
 (q '[:find ?title
      :where
      [_ :movie/title ?title]]
    @conn)
+
+(q '[:find ?name
+     :where
+     [?p :person/name ?name]]
+   @conn)
+
+(ds/qq '[:find ?name
+         :where
+         [_ :person/name ?name]])
 
 ;; Q1.
 (q '[:find ?title
