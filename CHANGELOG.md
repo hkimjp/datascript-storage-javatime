@@ -8,6 +8,7 @@
   (start {:url nil}) starts using `default-storage-url`.
   (start {:url url}) create a new database store at url.
   (restore) or (restart url) restart from memoried database.
+- updated :git/tag, :git/sha in README.md and bin/ds.
 
 # 0.7.0 (2025-08-28)
 
