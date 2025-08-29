@@ -1,6 +1,6 @@
 (ns user
   (:require
-   [hkimjp.datascript :as ds :refer [q transact! pull entity conn]]
+   [hkimjp.datascript :as ds :refer [q transact! pull entity conn put!]]
    [clj-reload.core :as reload]
    [java-time.api :as jt]))
 
@@ -13,26 +13,46 @@
 ; (reload/reload)
 
 ;;------
-(ds/start)
+(comment
+  (ds/start)
 
-(ds/puts! [{:db/id -1, :name "hkimura"} {:age 63} {:favorite "honami"}])
+  (ds/start {:url nil})
 
-(ds/qq '[:find ?e ?name ?age ?like
-         :where
-         [?e :name ?name]
-         [?e :age ?age]
-         [?e :favorite ?like]])
+  (ds/puts! [{:db/id -1, :name "hkimura"} {:age 63} {:favorite "yuino"}])
 
-(ds/pl 3)
+  (ds/qq '[:find ?e ?name ?age ?like
+           :where
+           [?e :name ?name]
+           [?e :age ?age]
+           [?e :favorite ?like]])
 
-(get (ds/et 1) :favorite)
+  (ds/stop)
 
-(transact! conn [{:db/id -1, :name "isana"} {:db/id -1, :wife "yuino"}])
+  (ds/restore)
 
-(-> (into [] (q '[:find ?name
-                  :in $ ?wife
-                  :where
-                  [?e :name ?name]
-                  [?e :wife ?wife]]
-                @conn "yuino"))
-    ffirst)
+  (ds/put! {:name "name" :age 100 :favo "money"})
+
+  (ds/qq '[:find ?e ?name ?age ?like
+           :in $ ?name
+           :where
+           [?e :name ?name]
+           [?e :age ?age]
+           [?e :like ?like]]
+         "name")
+
+  (ds/pl 3)
+
+  (get (ds/et 1) :favorite)
+
+  (transact! conn [{:db/id -1, :name "isana"} {:db/id -1, :wife "yuino"}])
+
+  (-> (into [] (q '[:find ?name
+                    :in $ ?wife
+                    :where
+                    [?e :name ?name]
+                    [?e :wife ?wife]]
+                  @conn "yuino"))
+      ffirst)
+
+  (ds/stop)
+  :rcf)

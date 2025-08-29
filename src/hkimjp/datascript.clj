@@ -12,7 +12,7 @@
 
 (def storage nil)
 
-(def default-storage-url "jdbc:sqlite:resources/db.sqlite")
+(def default-storage-url "jdbc:sqlite:/tmp/db.sqlite")
 
 (defn- datasource
   [url]
@@ -33,9 +33,8 @@
                      :thaw-str   #(read-string {:readers rw/tags} %)}))
 
 (defn- make-storage [url]
-  (t/log! :info (str "make-storage " url))
-  (let [url (or url default-storage-url)
-        st (-> url
+  (t/log! :info (str "make-storage url: " url))
+  (let [st (-> url
                datasource
                pooled-datasource
                sqlite-storage)]
@@ -43,10 +42,10 @@
 
 (defn- create-conn
   ([schema]
-   (t/log! :info (str "create-conn " schema))
+   (t/log! :info (str "create-conn on-memory schema: " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema))))
   ([schema storage]
-   (t/log! :info (str "create-conn " schema " with storage"))
+   (t/log! :info (str "create-conn with storage schema: " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
@@ -84,7 +83,8 @@
   ([{:keys [schema url] :as params}]
    (t/log! :info (str "start " params))
    (if (contains? params :url)
-     (create-conn schema {:storage (make-storage url)})
+     (create-conn schema
+                  {:storage (make-storage (or url default-storage-url))})
      (create-conn schema nil))))
 
 (defn stop []
@@ -130,8 +130,12 @@
     fact
     (assoc fact :db/id -1)))
 
+(defn put! [fact]
+  (t/log! :info (str "put! " fact))
+  (d/transact! conn [(supply-id fact)]))
+
 (defn puts! [facts]
-  (t/log! :info (str "puts " (abbrev facts)))
+  (t/log! :info (str "puts! " (abbrev facts)))
   (d/transact! conn (map supply-id facts)))
 
 (defn pl
