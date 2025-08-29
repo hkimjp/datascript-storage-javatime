@@ -1,6 +1,6 @@
 (ns user
   (:require
-   [hkimjp.datascript :as ds :refer [q transact! pull entity conn]]
+   [hkimjp.datascript :as ds :refer [q transact! pull entity conn put!]]
    [clj-reload.core :as reload]
    [java-time.api :as jt]))
 
@@ -13,40 +13,3 @@
 ; (reload/reload)
 
 ;;------
-(ds/start {:url nil})
-
-(ds/puts! [{:db/id -1, :name "hkimura"} {:age 63} {:favorite "honami"}])
-
-(ds/puts! [{:name "miyuki"} {:favorite "tenis"}])
-
-(ds/qq '[:find ?e ?name ?age ?like
-         :where
-         [?e :name ?name]
-         [?e :age ?age]
-         [?e :favorite ?like]])
-
-(ds/pl 1)
-
-(get (ds/et 1) :favorite)
-
-(transact! conn [{:db/id -1, :name "isana"} {:db/id -1, :wife "yuino"}])
-
-(-> (into [] (q '[:find ?name
-                  :in $ ?wife
-                  :where
-                  [?e :name ?name]
-                  [?e :wife ?wife]]
-                @conn "yuino"))
-    ffirst)
-
-(ds/puts! [{:name "clojure"}])
-
-(ds/qq '[:find ?e
-         :where
-         [?e]])
-
-(ds/pl 4)
-
-(ds/stop)
-
-(ds/restore)
