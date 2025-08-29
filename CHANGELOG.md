@@ -1,7 +1,7 @@
 # Unreleased
 
 
-# 0.7.1-SNAPSHOT
+# 0.7.1 (2025-08-29)
 
 - FIXED: use of default storage.
   (start) or (start {:scheme s}) starts on-memory.
