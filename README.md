@@ -14,7 +14,7 @@ I added some simple convenience functions for my own use.
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.1" :git/sha "a4d9c45"}
+io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.2" :git/sha "9abe965"}
 ```
 
 ## Usage
