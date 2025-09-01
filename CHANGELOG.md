@@ -1,7 +1,7 @@
 # Unreleased
 
 
-# 0.7.2-SNAPSHOT
+# 0.7.2 (2025-09-01)
 
 - added (start-or-restore jdbc-url)
 - addded `put!`
