@@ -87,6 +87,11 @@
                   {:storage (make-storage (or url default-storage-url))})
      (create-conn schema nil))))
 
+(defn start-or-restore [{:keys [url] :as params}]
+  (if (exist? url)
+    (restore {:url url})
+    (start params)))
+
 (defn stop []
   (close-conn))
 

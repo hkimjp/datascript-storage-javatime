@@ -1,15 +1,13 @@
 # Unreleased
 
--
--
 
+# 0.7.2-SNAPSHOT
 
-# 0.7.1-SNAPSHOT
-
-- addded - `put!`
-- changed - default-storage-url "/tmp/db.sqlite"
-- changed/fixed - resume takes a map `(resume {:url url})`
-- fixed - `(restore)` is an alias of `(resotore {:url default-storage-url})`
+- added (start-or-restore jdbc-url)
+- addded `put!`
+- changed default-storage-url "/tmp/db.sqlite"
+- changed/fixed resume takes a map `(resume {:url url})`
+- fixed  `(restore)` is an alias of `(resotore {:url default-storage-url})`
 
 # 0.7.1 (2025-08-29)
 
