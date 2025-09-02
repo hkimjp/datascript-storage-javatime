@@ -5,43 +5,51 @@
    [clojure.string :as str]
    [hkimjp.datascript :as ds :refer [start stop restore transact! q]]))
 
-;; prep
+;; prep -------------------------------
 
-(defn make-id-positive [infile outfile]
-  (fs/write-lines
-   outfile
-   (for [line (fs/read-all-lines infile)]
-     (str/replace line #"-(\d{3})" #(str (second %))))))
+; (defn make-id-positive [infile outfile]
+;   (fs/write-lines
+;    outfile
+;    (for [line (fs/read-all-lines infile)]
+;      (str/replace line #"-(\d{3})" #(str (second %))))))
 
-(make-id-positive "resources/docs.edn" "doc/docs-positive.edn")
+; (make-id-positive "resources/docs.edn" "doc/docs-positive.edn")
 
-(def my-docs
-  (clojure.edn/read-string (slurp "doc/docs-positive.edn")))
+; (def my-docs
+;   (clojure.edn/read-string (slurp "doc/docs-positive.edn")))
 
-(def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
+; (def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
 
-(def conn (start {:schema schema :url nil}))
+; (def conn (start {:schema schema :url "jdbc:sqlite:storage/tutorial.sqlite"}))
 
-(transact! conn my-docs)
+; (transact! conn my-docs)
 
-(comment
-  (ds/gc)
-  (ds/stop)
-  (def conn nil)
-  (ds/conn?)
-  :rcf)
+; (comment
+;   (ds/gc)
+;   (ds/stop)
+;   (def conn nil)
+;   (ds/conn?)
+;   :rcf)
 
-(stop)
+; (stop)
 
-;;------------------
+;; retart ----------
 
-(def conn (restore))
+(def conn (restore "jdbc:sqlite:storage/tutorial.sqlite"))
 
-;; tutorial starts
 (q '[:find ?title
      :where
      [_ :movie/title ?title]]
    @conn)
+
+(q '[:find ?name
+     :where
+     [?p :person/name ?name]]
+   @conn)
+
+(ds/qq '[:find ?name
+         :where
+         [_ :person/name ?name]])
 
 ;; Q1.
 (q '[:find ?title

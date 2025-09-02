@@ -1,5 +1,27 @@
 # Unreleased
 
+# 0.7.3 (2025-09-02)
+
+- restore's argument is a map {:url "jdbc-url"} or a string "jdc-url"
+- argument of start must be a map {:schema {schema} :url "url"}
+- consistency of log level
+
+# 0.7.2 (2025-09-01)
+
+- added (start-or-restore jdbc-url)
+- addded `put!`
+- changed default-storage-url "/tmp/db.sqlite"
+- changed/fixed resume takes a map `(resume {:url url})`
+- fixed  `(restore)` is an alias of `(resotore {:url default-storage-url})`
+
+# 0.7.1 (2025-08-29)
+
+- FIXED: use of default storage.
+  (start) or (start {:scheme s}) starts on-memory.
+  (start {:url nil}) starts using `default-storage-url`.
+  (start {:url url}) create a new database store at url.
+  (restore) or (restart url) restart from memoried database.
+- updated :git/tag, :git/sha in README.md and bin/ds.
 
 # 0.7.0 (2025-08-28)
 
