@@ -1,5 +1,11 @@
 # Unreleased
 
+- timing git/sha determins
+
+# 0.7.4-SNAPSHOT
+
+- version
+
 # 0.7.3 (2025-09-02)
 
 - restore's argument is a map {:url "jdbc-url"} or a string "jdc-url"

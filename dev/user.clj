@@ -13,6 +13,7 @@
 ;;------
 
 (comment
+  ds/version
   (ds/start)
   (ds/stop)
   (ds/start {:url "jdbc:sqlite:/tmp/db.sqlite"})
