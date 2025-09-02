@@ -1,5 +1,10 @@
 # Unreleased
 
+# 0.7.3-SNAPSHOT
+
+- restore's argument is a map {:url "jdbc-url"} or a string "jdc-url"
+- argument of start must be a map {:schema {schema} :url "url"}
+- consistency of log level
 
 # 0.7.2 (2025-09-01)
 
