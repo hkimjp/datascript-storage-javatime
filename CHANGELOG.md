@@ -5,7 +5,7 @@
 # 0.7.4 (2025-09-02) (2025-09-02)
 
 - version
-- added bump-version-local.sh
+- added `bump-version-local.sh`
 
 # 0.7.3 (2025-09-02)
 
