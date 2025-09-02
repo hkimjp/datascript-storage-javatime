@@ -20,7 +20,7 @@
 
 (def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
 
-(def conn (start {:schema schema :url nil}))
+(def conn (start {:schema schema :url "jdbc:sqlite:storage/tutorial.sqlite"}))
 
 (transact! conn my-docs)
 
@@ -35,7 +35,7 @@
 
 ;; retart ----------
 
-(def conn (restore))
+(def conn (restore "jdbc:sqlite:storage/tutorial.sqlite"))
 
 (q '[:find ?title
      :where

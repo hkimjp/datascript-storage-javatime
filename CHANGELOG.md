@@ -1,5 +1,9 @@
 # Unreleased
 
+# 0.7.3-SNAPSHOT
+
+- log level
+- argument of start must be a map or
 
 # 0.7.2 (2025-09-01)
 
