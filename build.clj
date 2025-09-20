@@ -3,7 +3,7 @@
   (:require [clojure.tools.build.api :as b]))
 
 (def lib 'io.github.hkimjp/datascript-storage-jatavime)
-(def version "0.7.2")
+(def version "0.7.4")
 (def main 'hkimjp.datascript)
 (def class-dir "target/classes")
 
