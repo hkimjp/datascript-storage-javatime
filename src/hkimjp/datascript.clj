@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(def version "0.7.4")
+(def version "0.7.5")
 
 (def conn nil)
 
@@ -27,6 +27,7 @@
   (t/log! :info "pooled-datasource")
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
+; do not remove
 (time-literals.read-write/print-time-literals-clj!)
 
 (defn- sqlite-storage
@@ -74,14 +75,6 @@
       (.exists (java.io.File. path)))
     (catch Exception _ false)))
 
-; (defn restore
-;   ([] (restore {:url default-storage-url}))
-;   ([{:keys [url]}]
-;    (t/log! :info (str "restore " url))
-;    (if (exist? url)
-;      (restore-conn (make-storage url))
-;      (throw (Exception. (str "does not exist " url))))))
-
 (defn restore
   ([] (restore {:url default-storage-url}))
   ([{:keys [url] :as param}]
@@ -126,8 +119,7 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;; how to call them? indirect or proxy functions?
-;; shadow functions?
+;; proxies
 
 (def transact! d/transact!)
 
@@ -144,11 +136,6 @@
   ([s] (abbrev s 80))
   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
            (str/replace-first s pat "$1..."))))
-
-;; FIXME: this did not work with (def ^:private conn nil)
-;; (defmacro qq [query & inputs]
-;;   (t/log! :info (str "q " query))
-;;   `(d/q ~query @conn ~@inputs))
 
 (defn qq [query & inputs]
   (t/log! :debug (str "qq " query))
