@@ -2,7 +2,22 @@
 
 - timing git/sha determins
 
-# 0.7.4 (2025-09-02) (2025-09-02)
+# 0.7.5
+
+- updated libraries
+
+| :file    | :name                         | :current | :latest |
+|----------|-------------------------------|----------|---------|
+| deps.edn | babashka/fs                   | 0.5.26   | 0.5.27  |
+|          | datascript/datascript         | 1.7.5    | 1.7.6   |
+|          | io.github.tonsky/clj-reload   | 0.9.8    | 1.0.0   |
+|          | io.github.tonsky/clojure-plus | 1.6.3    | 1.7.0   |
+|          | nrepl/nrepl                   | 1.3.1    | 1.4.0   |
+|          | org.clojure/clojure           | 1.12.2   | 1.12.3  |
+| pom.xml  | org.clojure/clojure           | 1.12.2   | 1.12.3  |
+
+
+# 0.7.4 (2025-09-02)
 
 - version
 - added `bump-version-local.sh`
