@@ -27,7 +27,7 @@ Then connect your REPL client.
 
     ❯ trench -p `cat .nrepl-port`
     user=> (require '[hkimjp.datascript :as ds])
-    nil
+(def conn (ds/start {:schema schema :url db-url}))    nil
 
 ## Examples
 
