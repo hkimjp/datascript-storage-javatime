@@ -6,6 +6,7 @@ help:
 plus:
   clj -X:dev:plus
 
+dev: nrepl
 nrepl:
   clj -M:dev:nrepl
 
