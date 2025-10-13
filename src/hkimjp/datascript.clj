@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(def version "0.7.5")
+(def version "0.7.6")
 
 (def conn nil)
 
