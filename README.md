@@ -4,7 +4,7 @@ My private datascript wrapper.
 Datascript + Sqlite backend with java-time support.
 
 I realy love tonsky's `Datascript` and `datascript-sql-stroage`.
-However, I could not store java-time objects onto it.
+However, I could not store any java-time objects on it.
 Henryw374's `com.widdindustries/time-literals` solved this issue.
 I much thank you two.
 
@@ -14,7 +14,7 @@ I added some simple convenience functions for my own use.
 
 deps.edn:
 ```
-io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.3" :git/sha "f9b4d1a"}
+io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.5" :git/sha "37bde3b"}
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ Then connect your REPL client.
 
     ❯ trench -p `cat .nrepl-port`
     user=> (require '[hkimjp.datascript :as ds])
-    nil
+(def conn (ds/start {:schema schema :url db-url}))    nil
 
 ## Examples
 

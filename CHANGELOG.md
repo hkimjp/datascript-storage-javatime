@@ -2,6 +2,12 @@
 
 - timing git/sha determins
 
+# 0.7.6
+
+- datascript 1.7.8 - from tonsky/datascript;
+
+    Skip storage writes for no-op transactions #492 via @jxonas
+
 # 0.7.5
 
 - updated libraries
