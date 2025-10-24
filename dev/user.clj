@@ -25,14 +25,21 @@
   ds/version
   (ds/start)
 
-  (transact! conn [{:db/id -1 :name "clojure"}])
-  (transact! conn [{:db/id -1 :name "haskell"}])
-  (transact! conn [{:db/id -1 :name "python"}])
-  (put! {:name "C"})
-  (q '[:find ?name
-       :where
-       [?e :name ?name]]
-     @conn)
+  (transact! conn [{:db/id -1 :name "clojure" :time (jt/local-date)}])
+  (transact! conn [{:db/id -1 :name "haskell" :time (jt/local-date 2025 10 10)}])
+  (transact! conn [{:db/id -1 :name "python"  :time (jt/local-date 2025 10 1)}])
+  (put! {:name "C" :time (jt/local-date 1970 1 1)})
+
+  (let [date (jt/local-date 2025 10 1)
+        ret (ds/qq '[:find ?name ?time ?date
+                     :in $ ?date
+                     :where
+                     [?e :name ?name]
+                     [?e :time ?time]
+                     [(< 1 2 (+ 1 3))]] ; no (+ 1 3) ok 4.
+                   date)]
+    ret)
+
   (pull @conn '[*] 1)
   (entity @conn 1)
 
