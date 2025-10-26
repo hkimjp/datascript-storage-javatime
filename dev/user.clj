@@ -23,7 +23,7 @@
 
 (comment
   ds/version
-  (ds/start)
+  (def (ds/start)
 
   (transact! conn [{:db/id -1 :name "clojure" :time (jt/local-date)}])
   (transact! conn [{:db/id -1 :name "haskell" :time (jt/local-date 2025 10 10)}])

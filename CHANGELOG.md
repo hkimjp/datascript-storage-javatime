@@ -2,6 +2,10 @@
 
 - timing git/sha determins
 
+# 0.7.7-SNAPSHOT
+
+- updated bin/ds
+
 # 0.7.6
 
 - datascript 1.7.8 - from tonsky/datascript;
