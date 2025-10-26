@@ -48,7 +48,7 @@
 
 (defn- create-conn
   ([schema]
-   (t/log! :info (str "create-conn on-memory schema: " schema))
+   (t/log! :info (str "create-conn on-memory, schema: " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema))))
   ([schema storage]
    (t/log! :info (str "create-conn with schema: "
