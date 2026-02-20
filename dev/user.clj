@@ -1,9 +1,9 @@
 (ns user
   (:require
-   [hkimjp.datascript :as ds :refer [q transact! pull entity conn put!]]
    [clj-reload.core :as reload]
-   [java-time.api :as jt]
    [taoensso.telemere :as t]))
+
+(t/set-min-level! :debug)
 
 ;;------
 (reload/init
@@ -13,16 +13,8 @@
 ;;------
 
 (comment
-  ds/version
-  (ds/start)
-  (ds/stop)
-  (ds/start {:url "jdbc:sqlite:/tmp/db.sqlite"})
-  (ds/stop)
-  (ds/start nil)
-  (ds/stop)
-  (class "str")
-  (class {:url "url"})
-
-  (= (class "str") (class "string"))
-
+  (require '[java-time.api :as jt]
+           '[hkimjp.datascript :as ds])
+  (jt/local-date-time)
+  (ds/conn?)
   :rcf)

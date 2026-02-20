@@ -28,7 +28,7 @@
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
 ; do not remove
-(time-literals.read-write/print-time-literals-clj!)
+(rw/print-time-literals-clj!)
 
 (defn- sqlite-storage
   [ds]
@@ -48,7 +48,7 @@
 
 (defn- create-conn
   ([schema]
-   (t/log! :info (str "create-conn on-memory schema: " schema))
+   (t/log! :info (str "create-conn on-memory, schema: " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema))))
   ([schema storage]
    (t/log! :info (str "create-conn with schema: "
@@ -56,7 +56,7 @@
    (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
-  (t/log! :info (str "restore-conn"))
+  (t/log! :info (str "restore-conn " storage))
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
 (defn- close-conn []
@@ -89,7 +89,7 @@
   "If the :url argument is found and its value is nil, use the value of
    `default-storage-url` instead of nil.
    If you want an on-memory database, do not give the :url option.
-   Use (restore) or (restore storage-url) when restoring."
+   Use (restore) or (restore {:url storage-url}) when restoring."
   ([]
    (t/log! :info "on-memory datascript, no schema provided")
    (create-conn nil nil))
@@ -155,7 +155,7 @@
   (d/transact! conn (map supply-id facts)))
 
 (defn pl
-  ([eid] (pl ['*] eid))
+  ([eid] (pl '[*] eid))
   ([selector eid]
    (t/log! :debug (str "pull " selector " " eid))
    (d/pull @conn selector eid)))

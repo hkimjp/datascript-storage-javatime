@@ -1,4 +1,4 @@
-(ns hkimjp.xtdb-tutorial
+(ns xtdb-tutorial
   (:require
    [babashka.fs :as fs]
    [clojure.edn]
@@ -7,31 +7,29 @@
 
 ;; prep -------------------------------
 
-; (defn make-id-positive [infile outfile]
-;   (fs/write-lines
-;    outfile
-;    (for [line (fs/read-all-lines infile)]
-;      (str/replace line #"-(\d{3})" #(str (second %))))))
+(defn make-id-positive [infile outfile]
+  (fs/write-lines
+   outfile
+   (for [line (fs/read-all-lines infile)]
+     (str/replace line #"-(\d{3})" #(str (second %))))))
 
-; (make-id-positive "resources/docs.edn" "doc/docs-positive.edn")
+(make-id-positive "resources/docs.edn" "doc/docs-positive.edn")
 
-; (def my-docs
-;   (clojure.edn/read-string (slurp "doc/docs-positive.edn")))
+(def my-docs
+  (clojure.edn/read-string (slurp "doc/docs-positive.edn")))
 
-; (def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
+(def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
 
-; (def conn (start {:schema schema :url "jdbc:sqlite:storage/tutorial.sqlite"}))
+(def conn (start {:schema schema :url "jdbc:sqlite:storage/tutorial.sqlite"}))
 
-; (transact! conn my-docs)
+(transact! conn my-docs)
 
-; (comment
-;   (ds/gc)
-;   (ds/stop)
-;   (def conn nil)
-;   (ds/conn?)
-;   :rcf)
+(ds/gc)
+(ds/stop)
+(def conn nil)
+(ds/conn?)
 
-; (stop)
+(stop)
 
 ;; retart ----------
 
@@ -357,7 +355,7 @@
      :where
      [?p :person/name ?name]
      [?p :person/born ?born]
-     [(hkimjp.xtdb-tutorial/age ?born ?today) ?age]]
+     [(xtdb-tutorial/age ?born ?today) ?age]]
    @conn "Tina Turner" (java.util.Date.))
 
 ; Q1. Find people by age. Use the function `user/age` to find the names of people, given their age and a date representing "today".
@@ -367,7 +365,7 @@
      :where
      [?p :person/name ?name]
      [?p :person/born ?born]
-     [(hkimjp.xtdb-tutorial/age ?born ?today) ?age]]
+     [(xtdb-tutorial/age ?born ?today) ?age]]
    @conn 69 (java.util.Date.))
 
 ; Q2. Find the names of people younger than Bruce Willis and their corresponding age.
@@ -379,7 +377,7 @@
      [?p :person/name ?name]
      [?p :person/born ?pb]
      [(< ?bb ?pb)]
-     [(hkimjp.xtdb-tutorial/age ?pb ?today) ?age]]
+     [(xtdb-tutorial/age ?pb ?today) ?age]]
    @conn #inst "2013-08-02T00:00:00.000-00:00")
 
 ; Aggregates

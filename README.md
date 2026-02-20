@@ -70,6 +70,6 @@ Maybe.
 
 ## License
 
-Copyright © 2025 Hiroshi Kimura
+Copyright © 2025,2026 Hiroshi Kimura
 
 Distributed under the Eclipse Public License version 1.0.
