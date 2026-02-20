@@ -4,13 +4,30 @@
 
 # 0.7.7-SNAPSHOT
 
+- updated libraries
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+| deps.edn | babashka/fs                   | 0.5.27   | 0.5.31   |
+|          | com.taoensso/telemere         | 1.1.0    | 1.2.1    |
+|          | io.github.clojure/tools.build | v0.10.10 | v0.10.12 |
+|          | io.github.tonsky/clojure-plus | 1.7.0    | 1.7.2    |
+|          | nrepl/nrepl                   | 1.5.1    | 1.5.2    |
+|          | org.clojure/clojure           | 1.12.3   | 1.12.4   |
+|          | org.clojure/test.check        | 1.1.1    | 1.1.3    |
+|          | org.xerial/sqlite-jdbc        | 3.50.3.0 | 3.51.2.0 |
+| pom.xml  | org.clojure/clojure           | 1.12.3   | 1.12.4   |
+
+
 - updated bin/ds
+
+  -J--enable-native-access=ALL-UNNAMED
 
 # 0.7.6
 
 - datascript 1.7.8 - from tonsky/datascript;
 
-    Skip storage writes for no-op transactions #492 via @jxonas
+  Skip storage writes for no-op transactions #492 via @jxonas
 
 # 0.7.5
 
