@@ -1,6 +1,6 @@
 (ns hkimjp.datascript-test
   (:require [clojure.test :refer [deftest testing is]]
-            [hkimjp.datascript :as ds]))
+            [hkimjp.datascript :as sut]))
 
 (deftest a-test
   (testing "I success."

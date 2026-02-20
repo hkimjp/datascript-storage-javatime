@@ -1,8 +1,6 @@
 (ns user
   (:require
-   [hkimjp.datascript :as ds :refer [q transact! pull entity conn put!]]
    [clj-reload.core :as reload]
-   [java-time.api :as jt]
    [taoensso.telemere :as t]))
 
 (t/set-min-level! :debug)
@@ -13,3 +11,10 @@
   :no-reload '#{user}})
 ; (reload/reload)
 ;;------
+
+(comment
+  (require '[java-time.api :as jt]
+           '[hkimjp.datascript :as ds])
+  (jt/local-date-time)
+  (ds/conn?)
+  :rcf)

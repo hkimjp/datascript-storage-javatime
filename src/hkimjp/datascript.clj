@@ -56,7 +56,7 @@
    (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
-  (t/log! :info (str "restore-conn"))
+  (t/log! :info (str "restore-conn " storage))
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
 (defn- close-conn []
