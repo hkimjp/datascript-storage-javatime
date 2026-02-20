@@ -4,6 +4,9 @@
 
 # 0.7.7 (2026-02-20)
 
+io.github.hkimjp/datascript-storage-javatime
+{:git/tag "0.7.7" :git/sha "ce4e814"}
+
 - updated libraries
 
 | :file    | :name                         | :current | :latest  |
