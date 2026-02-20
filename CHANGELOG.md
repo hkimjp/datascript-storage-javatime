@@ -2,7 +2,7 @@
 
 - timing git/sha determins
 
-# 0.7.7-SNAPSHOT
+# 0.7.7 (2026-02-20)
 
 - updated libraries
 
