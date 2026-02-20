@@ -1,6 +1,5 @@
 # Unreleased
 
-- timing git/sha determins
 
 # 0.7.7 (2026-02-20)
 
@@ -24,13 +23,12 @@ io.github.hkimjp/datascript-storage-javatime
 
 - updated bin/ds
 
-  -J--enable-native-access=ALL-UNNAMED
+    -J--enable-native-access=ALL-UNNAMED
 
 # 0.7.6
 
-- datascript 1.7.8 - from tonsky/datascript;
-
-  Skip storage writes for no-op transactions #492 via @jxonas
+- tonsky/datascript 1.7.8 -  Skip storage writes for no-op transactions 
+  #492 via @jxonas
 
 # 0.7.5
 
