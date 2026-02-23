@@ -8,11 +8,10 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-; do not remove
-(rw/print-time-literals-clj!)
-
 (def version "0.7.7")
+
 (def conn nil)
+
 (def storage nil)
 
 (def default-storage-url "jdbc:sqlite:/tmp/db.sqlite")
@@ -31,6 +30,8 @@
 (defn- sqlite-storage
   [ds]
   (t/log! :info "sqlite-stroage")
+  ; do not remove!
+  (rw/print-time-literals-clj!)
   (storage-sql/make ds
                     {:dbtype     :sqlite
                      :freeze-str pr-str

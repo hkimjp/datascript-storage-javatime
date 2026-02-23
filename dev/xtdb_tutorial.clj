@@ -34,6 +34,7 @@
 
 (alter-var-root #'conn (fn [_] (restore "jdbc:sqlite:storage/tutorial.sqlite")))
 
+conn
 (q '[:find ?title
      :where
      [_ :movie/title ?title]]
