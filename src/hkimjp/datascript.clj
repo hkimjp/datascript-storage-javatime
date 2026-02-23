@@ -8,10 +8,11 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
+; do not remove
+(rw/print-time-literals-clj!)
+
 (def version "0.7.7")
-
 (def conn nil)
-
 (def storage nil)
 
 (def default-storage-url "jdbc:sqlite:/tmp/db.sqlite")
@@ -26,9 +27,6 @@
   [ds]
   (t/log! :info "pooled-datasource")
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
-
-; do not remove
-(rw/print-time-literals-clj!)
 
 (defn- sqlite-storage
   [ds]

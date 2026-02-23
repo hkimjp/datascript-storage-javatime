@@ -1,6 +1,11 @@
 # Unreleased
 
 
+# 0.7.8-SNAPSHOT
+
+- just clean now uses regexp `\.bak$`
+- replaced 'def' with 'alter-var-root' in `/dev/xtdb_tutorial.clj`
+
 # 0.7.7 (2026-02-20)
 
 io.github.hkimjp/datascript-storage-javatime
