@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(def version "0.7.6")
+(def version "0.7.7")
 
 (def conn nil)
 
@@ -119,7 +119,7 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;; proxies
+;; aliases
 
 (def transact! d/transact!)
 
