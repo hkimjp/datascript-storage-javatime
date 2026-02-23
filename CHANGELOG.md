@@ -3,6 +3,7 @@
 
 # 0.7.8-SNAPSHOT
 
+- usage of `alter-var-root and `reset! atom`
 - just clean now uses regexp `\.bak$`
 - replaced 'def' with 'alter-var-root' in `/dev/xtdb_tutorial.clj`
 
