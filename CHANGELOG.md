@@ -3,13 +3,16 @@
 
 # 0.7.8 (2026-03-19)
 
+io.github.hkimjp/datascript-storage-javatime
+{:git/tag "0.7.8" :git/sha "aad430b"}
+
+
 - updated libraries
 
 | :file    | :name                         | :current | :latest  |
 |----------|-------------------------------|----------|----------|
 | deps.edn | babashka/fs                   | 0.5.31   | 0.5.32   |
 |          | io.github.clojure/tools.build | v0.10.12 | v0.10.13 |
-
 |          | org.xerial/sqlite-jdbc        | 3.51.2.0 | 3.51.3.0 |
 
 - not updated
