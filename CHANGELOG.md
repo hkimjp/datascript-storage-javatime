@@ -1,8 +1,32 @@
 # Unreleased
 
-- timing git/sha determins
+
+# 0.7.8 (2026-03-19)
+
+- updated libraries
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+| deps.edn | babashka/fs                   | 0.5.31   | 0.5.32   |
+|          | io.github.clojure/tools.build | v0.10.12 | v0.10.13 |
+
+|          | org.xerial/sqlite-jdbc        | 3.51.2.0 | 3.51.3.0 |
+
+- not updated
+
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+|          | nrepl/nrepl                   | 1.5.2    | 1.6.0    |
+
+- usage of `alter-var-root and `reset! atom`
+- just clean now uses regexp `\.bak$`
+- replaced 'def' with 'alter-var-root' in `/dev/xtdb_tutorial.clj`
 
 # 0.7.7 (2026-02-20)
+
+io.github.hkimjp/datascript-storage-javatime
+{:git/tag "0.7.7" :git/sha "ce4e814"}
 
 - updated libraries
 
@@ -21,13 +45,12 @@
 
 - updated bin/ds
 
-  -J--enable-native-access=ALL-UNNAMED
+    -J--enable-native-access=ALL-UNNAMED
 
 # 0.7.6
 
-- datascript 1.7.8 - from tonsky/datascript;
-
-  Skip storage writes for no-op transactions #492 via @jxonas
+- tonsky/datascript 1.7.8 -  Skip storage writes for no-op transactions 
+  #492 via @jxonas
 
 # 0.7.5
 

@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(def version "0.7.6")
+(def version "0.7.7")
 
 (def conn nil)
 
@@ -27,12 +27,11 @@
   (t/log! :info "pooled-datasource")
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
-; do not remove
-(rw/print-time-literals-clj!)
-
 (defn- sqlite-storage
   [ds]
   (t/log! :info "sqlite-stroage")
+  ; do not remove!
+  (rw/print-time-literals-clj!)
   (storage-sql/make ds
                     {:dbtype     :sqlite
                      :freeze-str pr-str
@@ -119,7 +118,7 @@
   (when (some? storage)
     (d/collect-garbage storage)))
 
-;; proxies
+;; aliases
 
 (def transact! d/transact!)
 

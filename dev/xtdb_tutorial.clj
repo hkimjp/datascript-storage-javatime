@@ -26,15 +26,15 @@
 
 (ds/gc)
 (ds/stop)
-(def conn nil)
+(alter-var-root #'conn (constantly nil))
 (ds/conn?)
-
 (stop)
 
 ;; retart ----------
 
-(def conn (restore "jdbc:sqlite:storage/tutorial.sqlite"))
+(alter-var-root #'conn (fn [_] (restore "jdbc:sqlite:storage/tutorial.sqlite")))
 
+conn
 (q '[:find ?title
      :where
      [_ :movie/title ?title]]
