@@ -1,16 +1,11 @@
 # Unreleased
 
-
-# 0.7.9-SNAPSHOT
-
-- updated bump-version-local.sh - nix-darwin.
-
 # 0.7.8 (2026-03-19)
 
 io.github.hkimjp/datascript-storage-javatime
 {:git/tag "0.7.8" :git/sha "aad430b"}
 
-
+- updated bump-version-local.sh - nix-darwin.
 - updated libraries
 
 | :file    | :name                         | :current | :latest  |
