@@ -1,7 +1,7 @@
 # Unreleased
 
 
-# 0.7.8-SNAPSHOT
+# 0.7.8 (2026-03-19)
 
 - updated libraries
 
