@@ -3,6 +3,22 @@
 
 # 0.7.8-SNAPSHOT
 
+- updated libraries
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+| deps.edn | babashka/fs                   | 0.5.31   | 0.5.32   |
+|          | io.github.clojure/tools.build | v0.10.12 | v0.10.13 |
+
+|          | org.xerial/sqlite-jdbc        | 3.51.2.0 | 3.51.3.0 |
+
+- not updated
+
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+|          | nrepl/nrepl                   | 1.5.2    | 1.6.0    |
+
 - usage of `alter-var-root and `reset! atom`
 - just clean now uses regexp `\.bak$`
 - replaced 'def' with 'alter-var-root' in `/dev/xtdb_tutorial.clj`
