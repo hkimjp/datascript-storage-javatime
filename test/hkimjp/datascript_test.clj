@@ -5,3 +5,6 @@
 (deftest a-test
   (testing "I success."
     (is (= 0 0))))
+
+(deftest sut
+  (is (= "0.7.8" sut/version)))

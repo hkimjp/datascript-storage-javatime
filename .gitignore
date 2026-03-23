@@ -30,3 +30,4 @@
 /storage/*
 .repl-port
 /doc/docs-positive.edn
+.DS_Store

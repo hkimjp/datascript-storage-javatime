@@ -1,15 +1,23 @@
 # Unreleased
 
 
+# 0.7.9
+
+- **BUGFIX** {:db/id -1} in `supply-id` does not work,
+  replaced by {:db/id (str (random-uuid))}
+
 # 0.7.8 (2026-03-19)
 
+io.github.hkimjp/datascript-storage-javatime
+{:git/tag "0.7.8" :git/sha "aad430b"}
+
+- changed bump-version-local.sh to use nix version `sed`.
 - updated libraries
 
 | :file    | :name                         | :current | :latest  |
 |----------|-------------------------------|----------|----------|
 | deps.edn | babashka/fs                   | 0.5.31   | 0.5.32   |
 |          | io.github.clojure/tools.build | v0.10.12 | v0.10.13 |
-
 |          | org.xerial/sqlite-jdbc        | 3.51.2.0 | 3.51.3.0 |
 
 - not updated
@@ -19,8 +27,8 @@
 |----------|-------------------------------|----------|----------|
 |          | nrepl/nrepl                   | 1.5.2    | 1.6.0    |
 
-- usage of `alter-var-root and `reset! atom`
-- just clean now uses regexp `\.bak$`
+- usage of `alter-var-root` and `reset! atom`
+- `just` clean now uses regexp `\.bak$`
 - replaced 'def' with 'alter-var-root' in `/dev/xtdb_tutorial.clj`
 
 # 0.7.7 (2026-02-20)

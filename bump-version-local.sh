@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ -x "/opt/homebrew/bin/gsed" ]; then
-  SED=/opt/homebrew/bin/gsed
+if [ -x "/run/current-system/sw/bin/sed" ]; then
+  SED=/run/current-system/sw/bin/sed
 else
   SED=/usr/bin/sed
 fi

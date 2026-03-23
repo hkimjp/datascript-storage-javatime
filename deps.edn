@@ -20,13 +20,11 @@
                  "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
                  "--enable-native-access=ALL-UNNAMED"]}
 
-  :plus
-  {:exec-fn    clojure+.core.server/start-server
-   :exec-args  {:name "socket repl(plus)"}}
+  :plus {:exec-fn    clojure+.core.server/start-server
+         :exec-args  {:name "socket repl(plus)"}}
 
-  :nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
-   :main-opts  ["-m" "nrepl.cmdline"]}
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
+          :main-opts  ["-m" "nrepl.cmdline"]}
 
   :kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
            :main-opts ["-m" "kaocha.runner"]}
