@@ -10,7 +10,7 @@
 
 (def version "0.7.8")
 
-(def conn nil)
+(def conn (atom nil)) ; changed from nil
 
 (def storage nil)
 
@@ -143,7 +143,7 @@
 (defn- supply-id [fact]
   (if (:db/id fact)
     fact
-    (assoc fact :db/id -1)))
+    (assoc fact :db/id (str (random-uuid)))))
 
 (defn put! [fact]
   (t/log! :debug (str "put! " fact))
