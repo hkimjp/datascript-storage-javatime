@@ -1,4 +1,8 @@
+# hkimjp/datascript
+
 # Unreleased
+
+* ds/conn? does not return correct (expected) value.
 
 
 # 0.7.9

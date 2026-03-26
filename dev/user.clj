@@ -11,7 +11,8 @@
  {:dirs ["src" "dev" "test"]
   :no-reload '#{user}})
 
-; (reload/reload)
+(def reload reload/reload)
+
 ;;------
 
 (comment
@@ -20,22 +21,23 @@
   (ds/conn?)
 
   (rand-int 100)
+
   (ds/start)
 
-  (dotimes [_ 10]
-    (ds/put! {:db/id -1 :num (rand-int 100)}))
+  (ds/conn?)
+
+  (time (dotimes [_ 1000]
+          (ds/put! {:db/id -1 :num (rand-int 100)})))
 
   (-> (ds/qq '[:find ?e ?num
                :where
-               [?e :num ?num]])
+               [?e :num ?num]
+               [(< 50 ?num)]])
       count)
 
-  (def data (mapv (fn [n] {:db/id -1, :num n}) (range 200 210)))
+  (def data (mapv (fn [n] {:db/id -1, :num n}) (range 1000)))
 
-  data
-
-  (ds/start)
-  (ds/puts! data)
+  (time (ds/puts! data))
 
   (-> (ds/qq '[:find ?e ?num
                :where
@@ -43,8 +45,22 @@
                [(< 300 ?num)]])
       count)
 
+  (-> (ds/q '[:find ?e ?num
+              :where
+              [?e :num ?num]
+              [(< 90 ?num)]]
+            @ds/conn)
+      count)
+
   (def d2 (mapv (fn [x] {:num x}) (range 300 310)))
 
   (ds/puts! d2)
+
+  ;; pull
+
+  (ds/qq '[:find (pull ?e [*])
+           :where
+           [?e :num ?num]
+           [(< 300 ?num)]])
 
   :rcf)
