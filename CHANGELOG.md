@@ -2,10 +2,11 @@
 
 # Unreleased
 
-* ds/conn? does not return correct (expected) value.
-
 # 0.7.10
 
+- {:git/tag "0.7.10" :git/sha "f21800d"}
+- `ds/restore` returns nil if successed. otherwise, bin/ds script prodoced
+ a lot of datom display. rlwrap crushed.
 - updated libraries
 
 | :file    | :name                         | :current | :latest  |

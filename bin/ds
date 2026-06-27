@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-clj -J--enable-native-access=ALL-UNNAMED -Sdeps '{:deps {io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.6" :git/sha "815ae05"}}}' -M -e "(require '[hkimjp.datascript :as ds])" -r
+clj -J--enable-native-access=ALL-UNNAMED -Sdeps '{:deps {io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.10" :git/sha "f21800d"}}}' -M -e "(require '[hkimjp.datascript :as ds])" -r
 
