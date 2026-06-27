@@ -4,7 +4,7 @@
    [taoensso.telemere :as t]
    [hkimjp.datascript :as ds]))
 
-(t/set-min-level! :debug)
+(t/set-min-level! :info)
 
 ;;------
 (reload/init
@@ -18,13 +18,12 @@
 (comment
   (require '[java-time.api :as jt])
   (jt/local-date-time)
+
+  (ds/conn?)
+  (ds/restore {:url "jdbc:sqlite:/tmp/test.sqlite"})
   (ds/conn?)
 
   (rand-int 100)
-
-  (ds/start)
-
-  (ds/conn?)
 
   (time (dotimes [_ 1000]
           (ds/put! {:db/id -1 :num (rand-int 100)})))
@@ -32,8 +31,7 @@
   (-> (ds/qq '[:find ?e ?num
                :where
                [?e :num ?num]
-               [(< 50 ?num)]])
-      count)
+               [(< 30 ?num)]]))
 
   (def data (mapv (fn [n] {:db/id -1, :num n}) (range 1000)))
 
@@ -63,4 +61,5 @@
            [?e :num ?num]
            [(< 300 ?num)]])
 
+  (ds/close)
   :rcf)

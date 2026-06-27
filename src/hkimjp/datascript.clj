@@ -8,7 +8,7 @@
    [time-literals.read-write :as rw]
    [taoensso.telemere :as t]))
 
-(def version "0.7.9")
+(def version "0.7.10")
 
 (def conn (atom nil)) ; changed from nil
 
@@ -69,19 +69,22 @@
 ;; -------------------------------------------
 
 (defn- exist? [url]
-  (try
-    (let [[_ _ path] (str/split url #":")]
-      (.exists (java.io.File. path)))
-    (catch Exception _ false)))
+  (let [[_ _ path] (str/split url #":")]
+    (.exists (java.io.File. path))))
+
+;(.exists (java.io.File. "/tmp/db.sqlite"))
 
 (defn restore
   ([] (restore {:url default-storage-url}))
   ([{:keys [url] :as param}]
    (t/log! :info (str "restore " param))
    (if (nil? url)
-     (restore {:url param})
+     (restore {:url param}); this is not `restore`
      (if (exist? url)
-       (restore-conn (make-storage url))
+       (try
+         (restore-conn (make-storage url))
+         nil
+         (catch Exception _ (str "can not restore " url)))
        (throw (Exception. (str "does not exist " url)))))))
 
 (defn start
@@ -101,6 +104,9 @@
        (t/log! :info (str "start on-memory datascript schema: "
                           (if (nil? schema) "nil" schema)))
        (create-conn schema nil)))))
+
+(defn close []
+  (close-conn))
 
 (defn start-or-restore [{:keys [url] :as params}]
   (t/log! :info (str "start-or-restore " params))
