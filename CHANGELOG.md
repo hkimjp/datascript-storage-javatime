@@ -1,5 +1,21 @@
+# hkimjp/datascript
+
 # Unreleased
 
+* ds/conn? does not return correct (expected) value.
+
+# 0.7.10
+
+- updated libraries
+
+| :file    | :name                         | :current | :latest  |
+|----------|-------------------------------|----------|----------|
+| deps.edn | babashka/fs                   | 0.5.32   | 0.5.33   |
+|          | io.github.clojure/tools.build | v0.10.13 | v0.10.14 |
+|          | nrepl/nrepl                   | 1.5.2    | 1.7.0    |
+|          | org.clojure/clojure           | 1.12.4   | 1.12.5   |
+|          | org.xerial/sqlite-jdbc        | 3.51.3.0 | 3.53.2.0 |
+| pom.xml  | org.clojure/clojure           | 1.12.4   | 1.12.5   |
 
 # 0.7.9
 
