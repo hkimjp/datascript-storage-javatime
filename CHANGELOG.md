@@ -2,6 +2,17 @@
 
 # Unreleased
 
+# 0.7.11-SNAPSHOT (2026-08-05)
+
+- updated libraries on m64
+
+| :file    | :name                     | :current | :latest  |
+|----------|---------------------------|----------|----------|
+| deps.edn | babashka/fs               | 0.5.33   | 0.5.34   |
+|          | com.taoensso/telemere     | 1.2.1    | 1.4.0    |
+|          | io.github.tonsky/fast-edn | 1.1.3    | 1.2.0    |
+|          | org.xerial/sqlite-jdbc    | 3.53.2.0 | 3.53.2.1 |
+
 # 0.7.10
 
 - {:git/tag "0.7.10" :git/sha "f21800d"}
