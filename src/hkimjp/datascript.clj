@@ -83,7 +83,8 @@
      (if (exist? url)
        (try
          (restore-conn (make-storage url))
-         nil
+         ; this is bad. why nil?
+         ;nil
          (catch Exception _ (str "can not restore " url)))
        (throw (Exception. (str "does not exist " url)))))))
 

@@ -19,8 +19,8 @@
   (clojure.edn/read-string (slurp "doc/docs-positive.edn")))
 
 (def schema {:movie/cast {:db/cardinality :db.cardinality/many}})
-
-(def conn (start {:schema schema :url "jdbc:sqlite:storage/tutorial.sqlite"}))
+(def url "jdbc:sqlite:storage/tutorial.sqlite")
+(def conn (start {:schema schema :url url}))
 
 (transact! conn my-docs)
 
@@ -32,9 +32,12 @@
 
 ;; retart ----------
 
-(alter-var-root #'conn (fn [_] (restore "jdbc:sqlite:storage/tutorial.sqlite")))
+conn
+
+(alter-var-root #'conn (constantly (restore {:url "jdbc:sqlite:storage/tutorial.sqlite"})))
 
 conn
+
 (q '[:find ?title
      :where
      [_ :movie/title ?title]]
