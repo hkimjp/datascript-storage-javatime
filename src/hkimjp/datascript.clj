@@ -14,22 +14,23 @@
 
 (def storage nil)
 
+; no use.
 (def default-storage-url "jdbc:sqlite:/tmp/db.sqlite")
 
 (defn- datasource
   [url]
-  (t/log! :info (str "datasource url: " url))
+  (t/log! :debug (str "datasource url: " url))
   (doto (org.sqlite.SQLiteDataSource.)
     (.setUrl url)))
 
 (defn- pooled-datasource
   [ds]
-  (t/log! :info "pooled-datasource")
+  (t/log! :debug "pooled-datasource")
   (storage-sql/pool ds {:max-conn 10 :max-idle-conn 4}))
 
 (defn- sqlite-storage
   [ds]
-  (t/log! :info "sqlite-stroage")
+  (t/log! :debug "sqlite-stroage")
   ; do not remove!
   (rw/print-time-literals-clj!)
   (storage-sql/make ds
@@ -38,7 +39,7 @@
                      :thaw-str   #(read-string {:readers rw/tags} %)}))
 
 (defn- make-storage [url]
-  (t/log! :info (str "make-storage url: " url))
+  (t/log! :debug (str "make-storage url: " url))
   (let [st (-> url
                datasource
                pooled-datasource
@@ -47,19 +48,19 @@
 
 (defn- create-conn
   ([schema]
-   (t/log! :info (str "create-conn on-memory, schema: " schema))
+   (t/log! :debug (str "create-conn on-memory, schema: " schema))
    (alter-var-root #'conn (constantly (d/create-conn schema))))
   ([schema storage]
-   (t/log! :info (str "create-conn with schema: "
+   (t/log! :debug (str "create-conn with schema: "
                       (if (nil? schema) "nil" schema)))
    (alter-var-root #'conn (constantly (d/create-conn schema storage)))))
 
 (defn- restore-conn [storage]
-  (t/log! :info (str "restore-conn " storage))
+  (t/log! :debug (str "restore-conn " storage))
   (alter-var-root #'conn (constantly (d/restore-conn storage))))
 
 (defn- close-conn []
-  (t/log! :info "close-conn")
+  (t/log! :debug "close-conn")
   (when (some? storage)
     (storage-sql/close storage)
     (alter-var-root #'storage (constantly nil)))
@@ -77,7 +78,7 @@
 (defn restore
   ([] (restore {:url default-storage-url}))
   ([{:keys [url] :as param}]
-   (t/log! :info (str "restore " param))
+   (t/log! :debug (str "restore " param))
    (if (nil? url)
      (restore {:url param}); this is not `restore`
      (if (exist? url)
@@ -94,29 +95,29 @@
    If you want an on-memory database, do not give the :url option.
    Use (restore) or (restore {:url storage-url}) when restoring."
   ([]
-   (t/log! :info "on-memory datascript, no schema provided")
+   (t/log! :debug "on-memory datascript, no schema provided")
    (create-conn nil nil))
   ([{:keys [schema url] :as params}]
    (if (contains? params :url)
      (let [url (or url default-storage-url)]
-       (t/log! :info (str "start with storage: " url))
+       (t/log! :debug (str "start with storage: " url))
        (create-conn schema {:storage (make-storage url)}))
      (do
-       (t/log! :info (str "start on-memory datascript schema: "
+       (t/log! :debug (str "start on-memory datascript schema: "
                           (if (nil? schema) "nil" schema)))
        (create-conn schema nil)))))
 
 (defn close []
   (close-conn))
 
+(defn stop []
+  (close-conn))
+
 (defn start-or-restore [{:keys [url] :as params}]
-  (t/log! :info (str "start-or-restore " params))
+  (t/log! :debug (str "start-or-restore " params))
   (if (exist? url)
     (restore {:url url})
     (start params)))
-
-(defn stop []
-  (close-conn))
 
 (defn conn? []
   (d/conn? conn))

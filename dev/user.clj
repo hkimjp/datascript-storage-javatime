@@ -4,14 +4,14 @@
    [taoensso.telemere :as t]
    [hkimjp.datascript :as ds]))
 
-(t/set-min-level! :info)
+(t/set-min-level! :debug)
 
 ;;------
 (reload/init
  {:dirs ["src" "dev" "test"]
   :no-reload '#{user}})
 
-(def reload reload/reload)
+(def reload! reload/reload)
 
 ;;------
 

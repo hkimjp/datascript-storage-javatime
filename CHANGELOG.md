@@ -2,6 +2,10 @@
 
 # Unreleased
 
+* start - on-memory, with or without schema. no default storage.
+* create - sqlite backend, with or without schema
+* restore - sqlite backend
+
 # 0.7.11-SNAPSHOT (2026-08-05)
 
 - updated libraries on m64
